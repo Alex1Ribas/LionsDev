@@ -4,3 +4,6 @@ let rl = readline.createInterface({
     output: process.stdout
 })
 
+rl.question('digite seu nome', (input) =>{
+    
+})
