@@ -4,8 +4,8 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-let vida = 15;
-let numero = (Math.random() *2 );
+let vida = 10;
+let numero = Math.floor((Math.random() * 31 ));
 
 console.log("Jogo de Adivinhação\n----------------");
 
@@ -19,7 +19,7 @@ rl.on("line", (input) => {
         console.log("dica: mais baixo");
     } else if (palpite < numero) {
         console.log("dica: mais alto");
-    } else if (numero === palpite) { 
+    } else if (numero === palpite) {
         console.log(`Parabéns você acertou o numero! O numero era: ${numero}`);
         process.exit();
     }
