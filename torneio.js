@@ -1,11 +1,9 @@
-
 const { log } = require('console');
 const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-menuPrincipal()
 
 let torneios = [];
 
@@ -81,7 +79,8 @@ async function adicionarTorneio(){
         nome,
         jogo,
         data,
-        participantes
+        participantes,
+        partidas : []
     }
 
     torneios.push(torneio);
@@ -100,51 +99,50 @@ function listarTorneio(){
     }
     console.log('Pressione ENTER para voltar...');
     rl.question('', menuPrincipal);
+}    
+
+function filtrarPartidas(){
+console.log("=".repeat(10)+' Filtrar Torneio por jogo '+ '='.repeat(10))
+    if( partidas.lenght === 0){
+        console.log('Nenhum torneio regitsrado...\nPressione Enter para voltar\n')
+            rl.question('', menuPrincipal)
+                return;
+    }
+
+    const games = [...new Set(array.map(game => game.jogo))];
+    console.log('Torneios:\n');
+    campeonatos.forEach((c, index) => {
+        console.log(`${index + 1}. ${c}`)
+    })
+
+    rl.question('Escolha um jogo para acompanhar:\n', (jogo) =>{
+    let indice = parseInt(jogo) -1
+    if (indice < 0 || isNaN(indice)|| indice >= games.length){
+        console.log('Escolha um numemro valido...')
+        return filtrarPartidas()
+    }
+
+    const gamechoice = games[indice];
+    const torneiosFiltrados = array.filter(torneio => torneio.jogo === gamechoice);
+    console.log(`\nTorneios do jogo "${gamechoice}":\n`);
+
+    if (torneiosFiltrados.length === 0) {
+        console.log('Nenhum torneio encontrado para este jogo.\n');
+    } else {
+        torneiosFiltrados.forEach((torneio, i) => {
+        console.log(`${i + 1}. ${torneio.nome} (${torneio.jogo})`);
+        });
+    }
+
+    console.log('\nPressione Enter para voltar');
+    rl.question('', menuPrincipal);
+    });
 }
 
 async function registrarPartida() {
     console.log("=-".repeat(20));
-     
-
-function filtrarPartidas(){
-console.log("=".repeat(10)+' Filtrar Torneio por jogo '+ '='.repeat(10))
-    if( partidas.lenght === 0)
-        console.log('Nenhum torneio regitsrado...\nPressione Enter para voltar\n')
-            rl.question('', menuPrincipal)
-                return;
-
-const games = [...new Set(array.map(game => game.jogo))];
-
-console.log('Torneios:\n');
-    campeonatos.forEach((c, index) => {
-        console.log(`${index + 1}. ${c}`)
- })
- 
- rl.question('Escolha um jogo para acompanhar:\n', (jogo) =>{
-    let indice = parseInt(jogo) -1
-    if (indice < 0 || isNaN(indice)|| indice >= games.length){
-        console.log('Escolha um numemro valido...')
-            return filtrarPartidas()}
-
-const gamechoice = games[indice];
-
-const torneiosFiltrados = array.filter(torneio => torneio.jogo === gamechoice);
-console.log(`\nTorneios do jogo "${gamechoice}":\n`);
-
-if (torneiosFiltrados.length === 0) {
-    console.log('Nenhum torneio encontrado para este jogo.\n');
-} else {
-    torneiosFiltrados.forEach((torneio, i) => {
-        console.log(`${i + 1}. ${torneio.nome} (${torneio.jogo})`);
-    });
-}
-
-console.log('\nPressione Enter para voltar');
-rl.question('', menuPrincipal);
-});
-}
     for (let i = 1; i <= torneios.length; i++) {
-        console.log(`${i} : ${torneios[i-1].nomeTorneio} , ${torneios[i-1].jogo}, ${torneios[i-1].data}`);
+        console.log(`${i} : ${torneios[i-1].nome} , ${torneios[i-1].jogo}, ${torneios[i-1].data}`);
     }
 
     let idTorneio = await askQuestion("Selecione o ID do Torneiro: ")
@@ -168,7 +166,7 @@ rl.question('', menuPrincipal);
 async function listarPartidas() {
     for (let i = 0; i < torneios.length; i++) {
         console.log("=-".repeat(20));
-        console.log(`Torneio ${torneios[i].nomeTorneio}`);
+        console.log(`Torneio ${torneios[i].nome}`);
         console.log("=-".repeat(20));
         for (let y = 0; y < torneios[i].partidas.length; y++) {
             console.log(`Partida #${y+1}`);
