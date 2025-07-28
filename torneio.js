@@ -48,3 +48,17 @@ switch (menu){
     })
     
 }
+
+async function remover() {
+    console.log('Current tournaments:', ListaTorneio); // Added for context
+    const input = await questionAsync('Digite o ID do torneio que quer remover: ');
+
+    if (ListaTorneio.includes(input)) {
+        let i = ListaTorneio.indexOf(input);
+        let removido = ListaTorneio.splice(i, 1);
+        console.log(`Torneio ${removido} foi removido com sucesso!`);
+    } else {
+        console.log('Torneio inválido!');
+    }
+    startFunction();
+}
