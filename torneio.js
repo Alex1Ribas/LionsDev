@@ -1,19 +1,18 @@
 
 const { log } = require('console');
-
 const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
+let torneios = [];
+
 function askQuestion(query) {
     return new Promise(resolve => {
         rl.question(query, resolve);
     });
 }
-
-  
 
 function menuPrincipal(){
     console.log(`
@@ -56,8 +55,49 @@ switch (menu){
         menuPrincipal();
         break;
         }
-    })
-  
+    });
+}
+
+async function adicionarTorneio(){
+    let participantes = [];
+    let nome = await askQuestion('Digite o nome do torneio: ');
+    let jogo = await askQuestion('Digite o nome do jogo: ');
+    let data = await askQuestion('Digite a data do torneio: ');
+    let condition = true;
+    while(condition){
+        let participante = await askQuestion('Escreva o nome de um participante: ');
+        participantes.push(participante);
+        let addMais = await askQuestion("Deseja inserir participantes? (S/N)");
+        if (addMais.toUpperCase() == "S") {
+            continue;
+        } else {
+            condition = !condition;
+        }
+    }
+
+    let torneio = {
+        nome,
+        jogo,
+        data,
+        participantes
+    }
+
+    torneios.push(torneio);
+    menuPrincipal();
+    console.log('Torneio Registrado!!!');
+}
+
+function listarTorneio(){
+    for(let i=0; i<torneios.length; i++){
+        console.log('========== LISTAGEM DE TORNEIOS ==========');
+        console.log(`${i + 1} - Nome: ${torneios[i].nome}, Jogo: ${torneios[i].jogo}, Data: ${torneios[i].data}`);
+        console.log('Participantes: ');
+        for(let j=0; j<torneios[i].participantes.length; j++){
+            console.log(`${j + 1} - ${torneios[i].participantes[j]}`);
+        }
+    }
+    console.log('Pressione ENTER para voltar...');
+    rl.question('', menuPrincipal);
 }
 
 async function registrarPartida() {
@@ -81,8 +121,8 @@ async function registrarPartida() {
         ganhador : ganhador
     }
     torneios[idTorneio-1].partidas.push(partida);    
-    console.log("Partida Salva! ")
     menuPrincipal();
+    console.log("Partida Salva! ")
 }
 
 async function listarPartidas() {
@@ -100,9 +140,7 @@ async function listarPartidas() {
             
         }
     }
-    menuPrincipal()
+    menuPrincipal();
 }
 
-menuPrincipal()
-}
-
+menuPrincipal();
