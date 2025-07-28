@@ -56,7 +56,8 @@ switch (menu){
         menuPrincipal();
         break;
         }
-    });
+    })
+    
 }
 
 async function adicionarTorneio(){
@@ -180,6 +181,19 @@ async function listarPartidas() {
         }
     }
     menuPrincipal();
+}
+
+async function removerTorneio() {
+    const input = await questionAsync('Digite o ID do torneio que quer remover: ');
+
+    if (input > 0 || input <= torneios.length) {
+        let i = input - 1;
+        torneios.splice(i, 1);
+        console.log(`Torneio ${torneios[i].nome} foi removido com sucesso!`);
+    } else {
+        console.log('Torneio inválido!');
+    }
+    MenuPrincipal();
 }
 
 menuPrincipal();
