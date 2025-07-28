@@ -1,9 +1,19 @@
+
+const { log } = require('console');
 const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 menuPrincipal()
+
+let torneios = [];
+
+function askQuestion(query) {
+    return new Promise(resolve => {
+        rl.question(query, resolve);
+    });
+}
 
 function menuPrincipal(){
     console.log(`
@@ -46,25 +56,58 @@ switch (menu){
         menuPrincipal();
         break;
         }
-    })
-    
+    });
 }
 
+async function adicionarTorneio(){
+    let participantes = [];
+    let nome = await askQuestion('Digite o nome do torneio: ');
+    let jogo = await askQuestion('Digite o nome do jogo: ');
+    let data = await askQuestion('Digite a data do torneio: ');
+    let condition = true;
+    while(condition){
+        let participante = await askQuestion('Escreva o nome de um participante: ');
+        participantes.push(participante);
+        let addMais = await askQuestion("Deseja inserir participantes? (S/N)");
+        if (addMais.toUpperCase() == "S") {
+            continue;
+        } else {
+            condition = !condition;
+        }
+    }
 
-const array = [
-    { nome: 'Copa FIFA 2025', jogo: 'FIFA' },
-    { nome: 'Desafio LOL 2025', jogo: 'League of Legends' },
-    { nome: 'Torneio CS Pro', jogo: 'CS:GO' },
-    { nome: 'FIFA Ultimate Cup', jogo: 'FIFA' },
-    { nome: 'LOL Academy Clash', jogo: 'League of Legends' },
-    { nome: 'Major CS:GO 2025', jogo: 'CS:GO' }
-];
+    let torneio = {
+        nome,
+        jogo,
+        data,
+        participantes
+    }
 
-//ainda não definidos: array/ 
+    torneios.push(torneio);
+    menuPrincipal();
+    console.log('Torneio Registrado!!!');
+}
+
+function listarTorneio(){
+    for(let i=0; i<torneios.length; i++){
+        console.log('========== LISTAGEM DE TORNEIOS ==========');
+        console.log(`${i + 1} - Nome: ${torneios[i].nome}, Jogo: ${torneios[i].jogo}, Data: ${torneios[i].data}`);
+        console.log('Participantes: ');
+        for(let j=0; j<torneios[i].participantes.length; j++){
+            console.log(`${j + 1} - ${torneios[i].participantes[j]}`);
+        }
+    }
+    console.log('Pressione ENTER para voltar...');
+    rl.question('', menuPrincipal);
+}
+
+async function registrarPartida() {
+    console.log("=-".repeat(20));
+     
 
 function filtrarPartidas(){
 console.log("=".repeat(10)+' Filtrar Torneio por jogo '+ '='.repeat(10))
-    if( array.lenght === 0)
+    if( partidas.lenght === 0)
         console.log('Nenhum torneio regitsrado...\nPressione Enter para voltar\n')
             rl.question('', menuPrincipal)
                 return;
@@ -99,3 +142,44 @@ console.log('\nPressione Enter para voltar');
 rl.question('', menuPrincipal);
 });
 }
+    for (let i = 1; i <= torneios.length; i++) {
+        console.log(`${i} : ${torneios[i-1].nomeTorneio} , ${torneios[i-1].jogo}, ${torneios[i-1].data}`);
+    }
+
+    let idTorneio = await askQuestion("Selecione o ID do Torneiro: ")
+    let qtsJogadores = await askQuestion("Qual a Quantidade de Jogadores: ")
+    let jogadores = []
+    // let data = await askQuestion("Informe a Data: ")
+    for (let i = 0; i < qtsJogadores; i++) {
+        jogadores.push(await askQuestion("Nickname do Jogador ou Equipe: "))
+    }
+    let ganhador = await askQuestion("Ganhador da Partida: ")
+    let partida = {
+        jogadores : jogadores,
+        // data : data,
+        ganhador : ganhador
+    }
+    torneios[idTorneio-1].partidas.push(partida);    
+    menuPrincipal();
+    console.log("Partida Salva! ")
+}
+
+async function listarPartidas() {
+    for (let i = 0; i < torneios.length; i++) {
+        console.log("=-".repeat(20));
+        console.log(`Torneio ${torneios[i].nomeTorneio}`);
+        console.log("=-".repeat(20));
+        for (let y = 0; y < torneios[i].partidas.length; y++) {
+            console.log(`Partida #${y+1}`);
+            for (let z = 0; z < torneios[i].partidas[y].jogadores.length; z++) {
+                console.log(`Jogadores/Equipes : ${torneios[i].partidas[y].jogadores[z]}`)
+            }
+            console.log(`Data: | Ganhador: ${torneios[i].partidas[y].ganhador}`);
+            console.log("-".repeat(25));
+            
+        }
+    }
+    menuPrincipal();
+}
+
+menuPrincipal();
