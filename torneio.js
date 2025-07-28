@@ -59,15 +59,6 @@ switch (menu){
     })
   
 }
-let torneios = []
-let torneio = {
-    nomeTorneio : "IEM",
-    jogo : "CS",
-    data : "28/07/2025",
-    participantes : ["Furia", "Liquid", "Mouz", "Mongolz", "Vitality"],
-    partidas : [ ]
-}
-torneios.push(torneio)
 
 async function registrarPartida() {
     console.log("=-".repeat(20));
