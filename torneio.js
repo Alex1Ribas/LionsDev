@@ -57,15 +57,15 @@ switch (menu){
 }
 
 async function adicionarTorneio(){
-    let jogadores = [];
+    let participantes = [];
     let nome = await askQuestion('Digite o nome do torneio: ');
     let jogo = await askQuestion('Digite o nome do jogo: ');
     let data = await askQuestion('Digite a data do torneio: ');
     let condition = true;
     while(condition){
-        let jogador = await askQuestion('Escreva o nome de um jogador: ');
-        jogadores.push(jogador);
-        let addMais = await askQuestion("Deseja inserir jogadores? (S/N)");
+        let participante = await askQuestion('Escreva o nome de um participante: ');
+        participantes.push(participante);
+        let addMais = await askQuestion("Deseja inserir participantes? (S/N)");
         if (addMais.toUpperCase() == "S") {
             continue;
         } else {
@@ -77,7 +77,7 @@ async function adicionarTorneio(){
         nome,
         jogo,
         data,
-        jogadores
+        participantes
     }
 
     torneios.push(torneio);
@@ -89,9 +89,9 @@ function listarTorneio(){
     for(let i=0; i<torneios.length; i++){
         console.log('========== LISTAGEM DE TORNEIOS ==========');
         console.log(`${i + 1} - Nome: ${torneios[i].nome}, Jogo: ${torneios[i].jogo}, Data: ${torneios[i].data}`);
-        console.log('Jogadores: ');
-        for(let j=0; j<torneios[i].jogadores.length; j++){
-            console.log(`${j + 1} - ${torneios[i].jogadores[j]}`);
+        console.log('Participantes: ');
+        for(let j=0; j<torneios[i].participantes.length; j++){
+            console.log(`${j + 1} - ${torneios[i].participantes[j]}`);
         }
     }
     console.log('Pressione ENTER para voltar...');
