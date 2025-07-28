@@ -4,6 +4,14 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
+let torneios = [];
+
+function askQuestion(query) {
+    return new Promise(resolve => {
+        rl.question(query, resolve);
+    });
+}
+
 function menuPrincipal(){
     console.log(`
     ====== E-SPORTS MENU ======
@@ -46,5 +54,48 @@ switch (menu){
         break;
         }
     })
-    
 }
+
+async function adicionarTorneio(){
+    let jogadores = [];
+    let nome = await askQuestion('Digite o nome do torneio: ');
+    let jogo = await askQuestion('Digite o nome do jogo: ');
+    let data = await askQuestion('Digite a data do torneio: ');
+    let condition = true;
+    while(condition){
+        let jogador = await askQuestion('Escreva o nome de um jogador: ');
+        jogadores.push(jogador);
+        let addMais = await askQuestion("Deseja inserir jogadores? (S/N)");
+        if (addMais.toUpperCase() == "S") {
+            continue;
+        } else {
+            condition = !condition;
+        }
+    }
+
+    let torneio = {
+        nome,
+        jogo,
+        data,
+        jogadores
+    }
+
+    torneios.push(torneio);
+    menuPrincipal();
+    console.log('Torneio Registrado!!!');
+}
+
+function listarTorneio(){
+    for(let i=0; i<torneios.length; i++){
+        console.log('========== LISTAGEM DE TORNEIOS ==========');
+        console.log(`${i + 1} - Nome: ${torneios[i].nome}, Jogo: ${torneios[i].jogo}, Data: ${torneios[i].data}`);
+        console.log('Jogadores: ');
+        for(let j=0; j<torneios[i].jogadores.length; j++){
+            console.log(`${j + 1} - ${torneios[i].jogadores[j]}`);
+        }
+    }
+    console.log('Pressione ENTER para voltar...');
+    rl.question('', menuPrincipal);
+}
+
+menuPrincipal();
