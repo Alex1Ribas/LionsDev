@@ -1,50 +1,106 @@
-Modulo 1 Introdução a Java Script, curso ofertado pela Lions Startups
+# 🧠 Módulo 1 - Fundamentos de Programação com JavaScript e Node.js
 
-Nesse modulo foi apresentado nos ensinado a fazer nosos primeiros CRUD
-utilizamos como ferramenta o Visual studio code com NPM e Node js
+**Curso oferecido pela Lions Startups**  
 
-1ª comando basicos:
-  ● cd - change directory (mudar diretório)
-  ● mkdir - make directory ( criar diretório)
-  ● ls - list (listar)
-  ● pwd - present working directory ( diretório de trabalho atual)
-  ● rm - remove ( remover)
-  ● touch - touch (tocar)
-  ● cp - copy (copiar)
-  ● echo - echo ( eco)
+Este repositório contém anotações, exercícios e projetos desenvolvidos durante o primeiro módulo do curso. O foco foi aprender os principais conceitos de lógica de programação e estruturação de código usando JavaScript com Node.js, além de ganhar familiaridade com o terminal e o VS Code.
 
-2ª Adicionando Extensões e temas no Vscode:
-  ● Tema : Bearded - Black & Diamond
-  ● Formatador: Prettier 
-  ● Es Lint como um corretor (nao foi utilizado ativamente)
-  ● Todo para ajudar a corrigir erros (nao foi utilizado ativamente)
+---
 
-3ª Tipos de dados:
-   ● Variaveis: let / var / const permitem manipulação de dados
-   ● String: ''/ "" / `` resposaveis por armazenar texto
-   ● concatenação + resposavel por unir strings
-   ● number e operações (mesmo um numero dentro de "" é considerado uma string)
-   ● Boolean: validador true or false
-   ● Operadores lógicos como AND (&&), OR (||) e NOT (!) são frequentemente utilizados para combinar e manipular valores booleanos
-   ● condicionais: IF / Switch
-   ● Switch: permite criar um menu de escolhas, semelhante a uma array, É uma condicional, alternativa ao uso de muitas condicionais
-   ● Laços de repetição: For / foreach / while
-   ● Stdin: responsavel por 'ouvir' a entrada
-   ● Stdout: reponsavel pela saida da resposta
+## 🧩 Conteúdos Abordados
 
-4ª Jogo de adivinhação:
-  ● Math.floor() : arredonda para baixo
-  ● Math.random(): gera numero aleatorio
-  ● Readline: biblioteca de comandos
-  ● rl.qeustion(): permite faazer uma pergunta e capturar a  entrada do usuario
+### ✅ Comandos de Terminal (CLI)
+- `cd`, `ls`, `mkdir`, `rm`, `touch`, `cp`, `pwd`, `echo`
 
-5ª Manipulação de Array:
- let NomeDaArray = []
- ● NomeDaArray.push(): adiciona elemento no final da array
- ● NomeDaArray.unshift(): adiciona elemento no inicio
- ● NomDdaArray.pop(): remove o ultimo elemento
- ● NomeDaArray.Shift(): remove o primeiro elemento
- ● NomeDaArray.Splice(elemento, quantidade de remoção): remove elemento especifico
- ● NomeDaArray.indexOf():mostra a posição do item
- ● NomeDaArray.length(): mostra a quantidade de itens
- ● NomeDaArray.includes(): verifica se faz parte
+### ✅ Ambiente de Desenvolvimento
+- **Editor:** Visual Studio Code
+- **Extensões usadas:** Prettier, ESLint (opcional), TODO Highlight
+- **Tema:** Bearded - Black & Diamond
+
+### ✅ Tipos de Dados
+- `String`, `Number`, `Boolean`, `null`, `undefined`, `Array`, `Object`
+- Conversão com `parseInt()`, `parseFloat()`, `.toString()`, `String()`
+- `typeof` para identificar tipos
+
+### ✅ Variáveis
+- Declaração com `let`, `const`, `var`
+- Boas práticas de nomenclatura (`camelCase`)
+
+### ✅ Operadores
+- **Aritméticos:** `+`, `-`, `*`, `/`, `%`
+- **Comparação:** `==`, `===`, `!=`, `!==`, `>`, `<`, `>=`, `<=`
+- **Lógicos:** `&&`, `||`, `!`
+
+### ✅ Controle de Fluxo
+- Condicionais: `if`, `else`, `else if`, `switch`
+- Laços de repetição: `for`, `while`, `do...while`, `forEach`
+
+### ✅ Funções
+- Funções tradicionais
+- Funções com parâmetros e retorno
+- **Arrow functions:**
+```js
+const soma = (a, b) => a + b;
+
+✅ Node.js e Estrutura de Projeto
+
+    Inicialização: npm init
+
+    Execução: node app.js
+
+    Pacotes: npm install
+
+    Organização com módulos:
+
+        Exportação: module.exports = ...
+
+        Importação: require('./arquivo')
+
+✅ Entrada e Saída
+
+    Entrada via terminal: process.stdin, readline.question()
+
+    Saída: console.log(), process.stdout.write()
+
+✅ Arrays
+
+    Métodos praticados:
+
+        push(), pop(), shift(), unshift(), splice()
+
+        includes(), indexOf(), length
+
+✅ Objetos
+
+Criação e acesso:
+const pessoa = { nome: "Ana", idade: 25 };
+console.log(pessoa.nome); // ou pessoa["nome"]
+
+✅ Debug e Comentários
+
+    Impressão: console.log(), console.error()
+
+    Comentários:
+
+        Linha: // comentário
+
+        Bloco: /* comentário */
+
+🎯 Projeto Prático: Jogo de Adivinhação
+
+    Uso de Math.random() e Math.floor() para gerar número aleatório
+
+    Entrada com readline
+
+    Lógica com condicionais e mensagens personalizadas
+
+🚀 Habilidades em Desenvolvimento
+
+    Lógica de programação
+
+    Manipulação de dados com JavaScript
+
+    Execução de scripts via terminal
+
+    Organização e leitura de código
+
+    Criação de pequenos projetos interativos
