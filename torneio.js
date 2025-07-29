@@ -62,7 +62,11 @@ async function adicionarTorneio(){
     let participantes = [];
     let nome = await askQuestion('Digite o nome do torneio: ');
     let jogo = await askQuestion('Digite o nome do jogo: ');
-    let data = await askQuestion('Digite a data do torneio: ');
+
+    let data = await askQuestion('Digite a data do torneio(DD/MM/YYYY): ');
+    const dataFormat = data.split('/')                                        
+    const dataFormatISO = `${dataFormat[0]}/${dataFormat[1]}/${dataFormat[2]}`//data
+                        //                     dd/MM/yyyy
     let condition = true;
     while(condition){
         let participante = await askQuestion('Escreva o nome de um participante: ');
@@ -78,7 +82,7 @@ async function adicionarTorneio(){
     let torneio = {
         nome,
         jogo,
-        data,
+        data : dataFormatISO,
         participantes,
         partidas : []
     }
@@ -140,6 +144,7 @@ console.log("=".repeat(10)+' Filtrar Torneio por jogo '+ '='.repeat(10))
 }
 
 async function registrarPartida() {
+    const dataDaPartida = new Date();    // registra a data atual
     console.log("=-".repeat(20));
     for (let i = 1; i <= torneios.length; i++) {
         console.log(`${i} : ${torneios[i-1].nome} , ${torneios[i-1].jogo}, ${torneios[i-1].data}`);
@@ -155,7 +160,7 @@ async function registrarPartida() {
     let ganhador = await askQuestion("Ganhador da Partida: ")
     let partida = {
         jogadores : jogadores,
-        // data : data,
+        data : dataDaPartida,
         ganhador : ganhador
     }
     torneios[idTorneio-1].partidas.push(partida);    
@@ -173,7 +178,7 @@ async function listarPartidas() {
             for (let z = 0; z < torneios[i].partidas[y].jogadores.length; z++) {
                 console.log(`Jogadores/Equipes : ${torneios[i].partidas[y].jogadores[z]}`)
             }
-            console.log(`Data: | Ganhador: ${torneios[i].partidas[y].ganhador}`);
+            console.log(`Data: ${torneios[i].partidas[y].data.toLocaleDateString('pt-BR')} | Ganhador: ${torneios[i].partidas[y].ganhador}`);
             console.log("-".repeat(25));
             
         }
