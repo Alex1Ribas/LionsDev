@@ -103,15 +103,15 @@ function listarTorneio(){
 
 function filtrarPartidas(){
 console.log("=".repeat(10)+' Filtrar Torneio por jogo '+ '='.repeat(10))
-    if( partidas.lenght === 0){
+    if( torneios.lenght === 0){
         console.log('Nenhum torneio regitsrado...\nPressione Enter para voltar\n')
             rl.question('', menuPrincipal)
                 return;
-    }
+    }   
 
-    const games = [...new Set(array.map(game => game.jogo))];
+    const games = [...new Set(torneios.map(game => game.jogo))];
     console.log('Torneios:\n');
-    campeonatos.forEach((c, index) => {
+    games.forEach((c, index) => {
         console.log(`${index + 1}. ${c}`)
     })
 
@@ -123,8 +123,8 @@ console.log("=".repeat(10)+' Filtrar Torneio por jogo '+ '='.repeat(10))
     }
 
     const gamechoice = games[indice];
-    const torneiosFiltrados = array.filter(torneio => torneio.jogo === gamechoice);
-    console.log(`\nTorneios do jogo "${gamechoice}":\n`);
+    const torneiosFiltrados = torneios.filter(torneio => torneio.jogo === gamechoice);
+    console.log(`\n==========\n Torneios do jogo "${gamechoice}":\n`);
 
     if (torneiosFiltrados.length === 0) {
         console.log('Nenhum torneio encontrado para este jogo.\n');
@@ -134,7 +134,7 @@ console.log("=".repeat(10)+' Filtrar Torneio por jogo '+ '='.repeat(10))
         });
     }
 
-    console.log('\nPressione Enter para voltar');
+    console.log('\n==========\nPressione Enter para voltar');
     rl.question('', menuPrincipal);
     });
 }
