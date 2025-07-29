@@ -1,3 +1,10 @@
+A estrutura e o conteúdo estão ótimos, Alex, mas a formatação ficou inconsistente a partir da seção **"Node.js e Estrutura de Projeto"** — ela perdeu os blocos `###`, os `-` para listas e os trechos de código não estão formatados com blocos de `markdown`, o que prejudica a leitura no GitHub.
+
+Aqui está a **versão corrigida e formatada corretamente**, pronta pra colar no seu `README.md`:
+
+---
+
+````markdown
 # 🧠 Módulo 1 - Fundamentos de Programação com JavaScript e Node.js
 
 **Curso oferecido pela Lions Startups**  
@@ -40,67 +47,61 @@ Este repositório contém anotações, exercícios e projetos desenvolvidos dura
 - **Arrow functions:**
 ```js
 const soma = (a, b) => a + b;
+````
 
-✅ Node.js e Estrutura de Projeto
+### ✅ Node.js e Estrutura de Projeto
 
-    Inicialização: npm init
+* Inicialização: `npm init`
+* Execução: `node app.js`
+* Pacotes: `npm install`
+* Organização com módulos:
 
-    Execução: node app.js
+  * Exportação: `module.exports = ...`
+  * Importação: `require('./arquivo')`
 
-    Pacotes: npm install
+### ✅ Entrada e Saída
 
-    Organização com módulos:
+* Entrada via terminal: `process.stdin`, `readline.question()`
+* Saída: `console.log()`, `process.stdout.write()`
 
-        Exportação: module.exports = ...
+### ✅ Arrays
 
-        Importação: require('./arquivo')
+* Métodos praticados:
 
-✅ Entrada e Saída
+  * `push()`, `pop()`, `shift()`, `unshift()`, `splice()`
+  * `includes()`, `indexOf()`, `length`
 
-    Entrada via terminal: process.stdin, readline.question()
-
-    Saída: console.log(), process.stdout.write()
-
-✅ Arrays
-
-    Métodos praticados:
-
-        push(), pop(), shift(), unshift(), splice()
-
-        includes(), indexOf(), length
-
-✅ Objetos
+### ✅ Objetos
 
 Criação e acesso:
+
+```js
 const pessoa = { nome: "Ana", idade: 25 };
 console.log(pessoa.nome); // ou pessoa["nome"]
+```
 
-✅ Debug e Comentários
+### ✅ Debug e Comentários
 
-    Impressão: console.log(), console.error()
+* Impressão: `console.log()`, `console.error()`
+* Comentários:
 
-    Comentários:
+  * Linha: `// comentário`
+  * Bloco: `/* comentário */`
 
-        Linha: // comentário
+---
 
-        Bloco: /* comentário */
+## 🎯 Projeto Prático: Jogo de Adivinhação
 
-🎯 Projeto Prático: Jogo de Adivinhação
+* Uso de `Math.random()` e `Math.floor()` para gerar número aleatório
+* Entrada com `readline`
+* Lógica com condicionais e mensagens personalizadas
 
-    Uso de Math.random() e Math.floor() para gerar número aleatório
+---
 
-    Entrada com readline
+## 🚀 Habilidades em Desenvolvimento
 
-    Lógica com condicionais e mensagens personalizadas
-
-🚀 Habilidades em Desenvolvimento
-
-    Lógica de programação
-
-    Manipulação de dados com JavaScript
-
-    Execução de scripts via terminal
-
-    Organização e leitura de código
-
-    Criação de pequenos projetos interativos
+* Lógica de programação
+* Manipulação de dados com JavaScript
+* Execução de scripts via terminal
+* Organização e leitura de código
+* Criação de pequenos projetos interativos
