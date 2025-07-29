@@ -182,16 +182,33 @@ async function listarPartidas() {
 }
 
 async function removerTorneio() {
-    const input = await questionAsync('Digite o ID do torneio que quer remover: ');
-
-    if (input > 0 || input <= torneios.length) {
-        let i = input - 1;
-        torneios.splice(i, 1);
-        console.log(`Torneio ${torneios[i].nome} foi removido com sucesso!`);
-    } else {
-        console.log('Torneio inválido!');
+    console.log('========== REMOVER TORNEIO ==========');
+    if (torneios.length === 0) {
+        console.log('Nenhum torneio para remover.');
+        console.log('\nPressione ENTER para voltar...');
+        await askQuestion('');
+        await menuPrincipal();
+        return;
     }
-    MenuPrincipal();
+
+    console.log('Torneios disponíveis para remoção:');
+    torneios.forEach((t, index) => {
+        console.log(`${index + 1} - ${t.nome} (${t.jogo})`);
+    });
+
+    const input = await askQuestion('Digite o NÚMERO do torneio que quer remover: ');
+    const indexToRemove = parseInt(input) - 1; // Convert to 0-based index
+
+    // Validate input
+    if (isNaN(indexToRemove) || indexToRemove < 0 || indexToRemove >= torneios.length) {
+        console.log('Entrada inválida. Por favor, digite um número válido da lista.');
+    } else {
+        const removedTorneio = torneios.splice(indexToRemove, 1);
+        console.log(`Torneio "${removedTorneio[0].nome}" foi removido com sucesso!`);
+    }
+    console.log('\nPressione ENTER para voltar...');
+    await askQuestion(''); // Wait for user to press enter
+    await menuPrincipal(); // Go back to the main menu
 }
 
 menuPrincipal();
