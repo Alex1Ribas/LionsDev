@@ -211,4 +211,4 @@ async function removerTorneio() {
     await menuPrincipal(); // Go back to the main menu
 }
 
-menuPrincipal();
+menuPrincipal()
