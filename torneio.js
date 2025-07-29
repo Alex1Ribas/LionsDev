@@ -98,4 +98,4 @@ function listarTorneio(){
     rl.question('', menuPrincipal);
 }
 
-menuPrincipal();
+menuPrincipal()
