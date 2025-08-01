@@ -30,8 +30,7 @@ async function adicionarTorneio(){
         partidas : []
     }
 
-    torneios.push(torneio);
-    menuPrincipal();
+    arrayTorneio.push(torneio);
     console.log('Torneio Registrado!!!');
 }
 

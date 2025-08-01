@@ -1,14 +1,16 @@
-function listarTorneio(){
-    for(let i=0; i<torneios.length; i++){
+const { askQuestion } = require("./askQuestion");
+const arrayTorneio = require("../data/arrayTorneio")
+
+async function listarTorneio(){
+    for(let i=0; i<arrayTorneio.length; i++){
         console.log('========== LISTAGEM DE TORNEIOS ==========');
-        console.log(`${i + 1} - Nome: ${torneios[i].nome}, Jogo: ${torneios[i].jogo}, Data: ${torneios[i].data}`);
+        console.log(`${i + 1} - Nome: ${arrayTorneio[i].nome}, Jogo: ${arrayTorneio[i].jogo}, Data: ${arrayTorneio[i].data}`);
         console.log('Participantes: ');
-        for(let j=0; j<torneios[i].participantes.length; j++){
-            console.log(`${j + 1} - ${torneios[i].participantes[j]}`);
+        for(let j=0; j<arrayTorneio[i].participantes.length; j++){
+            console.log(`${j + 1} - ${arrayTorneio[i].participantes[j]}`);
         }
     }
     console.log('Pressione ENTER para voltar...');
-    rl.question('', menuPrincipal);
+    await askQuestion(" ")
 }   
-// TODO/ Refatorar os rl.question pora askQuestion
 module.exports = listarTorneio

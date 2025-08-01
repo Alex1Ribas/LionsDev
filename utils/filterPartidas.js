@@ -1,41 +1,42 @@
 const arrayTorneio = require("../data/arrayTorneio")
 const {askQuestion} = require("./askQuestion")
 
-// TODO/ Refatorar codigo de RL para askQuestion
-function filtrarPartidas(){
+async function filtrarPartidas(){
 console.log("=".repeat(10)+' Filtrar Torneio por jogo '+ '='.repeat(10))
-    if( torneios.length === 0){
+    if( arrayTorneio.length === 0){
         console.log('\nBuscando... '.repeat(3) + '\nNenhum torneio regitsrado...\n\nPressione Enter para voltar\n')
-            rl.question('', menuPrincipal)
+            await askQuestion(" ")
                 return;
     }   
 
-    const games = [...new Set(torneios.map(game => game.jogo))];
+    const games = [...new Set(arrayTorneio.map(game => game.jogo))];
     console.log('Torneios:\n');
     games.forEach((c, index) => {
         console.log(`${index + 1}. ${c}`)
     })
 
-    rl.question('\nEscolha um jogo para acompanhar:\n', (jogo) =>{
+    let jogo = await askQuestion('\nEscolha um jogo para acompanhar:\n')
+
     let indice = parseInt(jogo) -1
     if (indice < 0 || isNaN(indice)|| indice >= games.length){
-        console.log('Escolha um numemro valido...')
+        console.log('Escolha um numemo valido...')
         return filtrarPartidas()
     }
 
     const gamechoice = games[indice];
-    const torneiosFiltrados = torneios.filter(torneio => torneio.jogo === gamechoice);
+    const torneiosFiltrados = arrayTorneio.filter(arrayTorneio => arrayTorneio.jogo === gamechoice);
     console.log('=-'.repeat(30) + `\n Torneios do jogo "${gamechoice}":\n`);
 
     if (torneiosFiltrados.length === 0) {
         console.log('Nenhum torneio encontrado para este jogo.\n');
     } else {
-        torneiosFiltrados.forEach((torneio, i) => {
-        console.log(`${i + 1}. ${torneio.nome} (${torneio.jogo})`);
+        torneiosFiltrados.forEach((arrayTorneio, i) => {
+        console.log(`${i + 1}. ${arrayTorneio.nome} (${arrayTorneio.jogo})`);
         });
     }
 
     console.log('=-'.repeat(30) + '\nPressione Enter para voltar');
-    rl.question('', menuPrincipal);
-    });
+    await askQuestion(" ")
 }
+
+module.exports = filtrarPartidas;
