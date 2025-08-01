@@ -1,20 +1,7 @@
-const { log } = require('console');
-const readline = require('readline');
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+const {askQuestion, rl} = require("./utils/askQuestion")
 
-let torneios = [];
-
-function askQuestion(query) {
-    return new Promise(resolve => {
-        rl.question(query, resolve);
-    });
-}
-
-function menuPrincipal(){
-    console.log(`
+async function startFunction() {
+    let menu = parseInt(await askQuestion(`
     ====== E-SPORTS MENU ======
     1. Adicionar Torneio
     2. Listar Torneios
@@ -23,40 +10,28 @@ function menuPrincipal(){
     5. Filtrar Torneios por Jogo
     6. Remover Torneio
     7. SAIR
-`)
-
-rl.question('\n Escolha uma opção acima:\n', (input1)=>{
-    let menu = parseInt(input1)
-switch (menu){
-    case 1:
-        adicionarTorneio();
-        break;
-    case 2:
-        listarTorneio();
-        break;
-    case 3: 
-        registrarPartida();
-        break;
-    case 4:
-        listarPartidas();
-        break;
-    case 5:
-        filtrarPartidas();
-        break;
-    case 6:
-        removerTorneio();
-        break;
-    case 7:
-        rl.close();
-        break;
-    default:
-        console.log("Digite um número Valido...")
-        menuPrincipal();
-        break;
+`))
+let cond = !false
+    while (cond) {
+        switch (menu) {
+            case 1: adicionarTorneio(); break;
+            case 2: listarTorneio(); break;
+            case 3: registrarPartida(); break;
+            case 4: listarPartidas(); break;
+            case 5: filtrarPartidas(); break;
+            case 6: removerTorneio(); break;
+            case 7:
+                cond = !true 
+                rl.close(); 
+                break;
+            default:
+                console.log("Digite um número Valido...")
+                startFunction();
+                break;
         }
-    })
-    
+    }
 }
+
 
 async function adicionarTorneio(){
     let participantes = [];
