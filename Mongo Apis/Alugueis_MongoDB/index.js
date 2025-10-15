@@ -1,0 +1,32 @@
+const express = require("express");
+const mongoose = require("mongoose");
+mongoose.connect("mongodb+srv://alexribas12_db_user:c9nGDDjqPk6EuL7R@cluster0.dnupdb2.mongodb.net/")
+
+const app = express();
+const port = 3000;
+
+  app.use(express.json());
+
+const rotaLivros = require('./rotas/rotaLivros');
+const rotaEstudante = require('./rotas/rotaEstudantes');
+const rotaAluguel = require('./rotas/rotaAluguel');
+
+  app.use('/livros', rotaLivros);
+  app.use('/estudantes', rotaEstudante);
+  app.use('/Aluguel', rotaAluguel);
+
+  app.get('/', (req, res) => {
+    res.send('API Locação de Livros');
+});
+
+  app.listen(port, () => {
+    console.log(`Servidor rodando na porta:${port}`);
+});
+
+
+  mongoose.connection.once("open", () =>{
+    console.log("conectando ao mongoDB");
+});
+  mongoose.connection?.on('error', (err) =>{
+    console.error(`Error to connect - MongoDB: Error: ${error.message}`);
+})
