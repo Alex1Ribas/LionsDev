@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://alexribas12_db_user:c9nGDDjqPk6EuL7R@cluster0.dnupdb2.mongodb.net/")
+mongoose.connect("URL_mongoDb")
 
 const app = express();
 const port = 3000;
