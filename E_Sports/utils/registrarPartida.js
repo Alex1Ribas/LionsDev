@@ -1,5 +1,5 @@
 const {askQuestion} = require("./askQuestion")
-const arrayTorneio = require("../data/arrayTorneio")
+const arrayTorneio = require("../E_Sports/data/arrayTorneio")
 
 async function registrarPartida() {
     const dataDaPartida = new Date();    // registra a data atual

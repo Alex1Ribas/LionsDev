@@ -1,10 +1,10 @@
-const {askQuestion, rl} = require("./utils/askQuestion")
-const adicionarTorneio = require("./utils/addTorneio")
-const listarTorneio = require("./utils/listTorneio")
-const filtrarPartidas = require("./utils/filterPartidas")
-const registrarPartida = require("./utils/registrarPartida")
-const listarPartidas = require("./utils/listPartidas")
-const removerTorneio = require("./utils/removeTorneio")
+const {askQuestion, rl} = require("../utils/askQuestion")
+const adicionarTorneio = require("../utils/addTorneio")
+const listarTorneio = require("../utils/listTorneio")
+const filtrarPartidas = require("../utils/filterPartidas")
+const registrarPartida = require("../utils/registrarPartida")
+const listarPartidas = require("../utils/listPartidas")
+const removerTorneio = require("../utils/removeTorneio")
 
 async function startFunction() {
    

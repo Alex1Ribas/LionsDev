@@ -1,4 +1,4 @@
-const arrayTorneio = require("../data/arrayTorneio")
+const arrayTorneio = require("../E_Sports/data/arrayTorneio")
 
 async function listarPartidas() {
     for (let i = 0; i < arrayTorneio.length; i++) {

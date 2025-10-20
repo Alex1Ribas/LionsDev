@@ -1,4 +1,4 @@
-const arrayTorneio = require("../data/arrayTorneio")
+const arrayTorneio = require("../E_Sports/data/arrayTorneio")
 const {askQuestion} = require("./askQuestion")
 
 async function removerTorneio() {

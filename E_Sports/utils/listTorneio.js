@@ -1,5 +1,5 @@
 const { askQuestion } = require("./askQuestion");
-const arrayTorneio = require("../data/arrayTorneio")
+const arrayTorneio = require("../E_Sports/data/arrayTorneio")
 
 async function listarTorneio(){
     for(let i=0; i<arrayTorneio.length; i++){
