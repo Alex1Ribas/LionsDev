@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.2",
+    "nodemon": "^3.1.10"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "name": "token",
+  "version": "1.0.0",
+  "description": "bcrypt = realiza a enciptação da senha utilizando hash  |-> a senha é encriptada usando bcrypt.hash(senha, salt) onde salt é o tamanho do hash, sendo que quanto maior mais tempo para criptografar.  |-> usa-se o bcrypt.compare(senha, usuario.senha) para encriptar a senha e comparar com a senha encriptada no banco de dados",
+  "main": "app.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -13,9 +13,10 @@ async function Register(req, res) {
         const hashSenha = await bcrypt.hash(senha, 10); // Criptografa a senha
 
         const novoUsuario = await User.create({ nome, email, senha: hashSenha });// Cria o novo usuario no banco de dados
+        const payload = {userId: novoUsuario._id, email: novoUsuario.email};
 
-        const token = jwt.sign(novoUsuario, process.env.ACESS_TOKEN_SECRET) // Gera um token JWT para o novo usuario
-        return res.status(201).json({ message: "usuario criado com sucesso", newUSer: newUSer, token: token });
+        const token = jwt.sign(payload, process.env.ACESS_TOKEN_SECRET, { expiresIn: '7d' }) // Gera um token JWT para o usando o usurio de base
+        return res.status(201).json({ message: "usuario criado com sucesso", novoUsuario: novoUsuario, token: token});//notifica que o usuario token foi criado com sucesso
 
     } catch (error) {
         console.error('Erro ao criar usuario', error.message);

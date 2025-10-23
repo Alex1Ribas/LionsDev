@@ -10,8 +10,8 @@ async function Login(req, res) {
             return res.status(400).json({ message: "Os campos 'email' e 'senha' são obrigatórios." });
         };// Valida se os dados foram preenchidos
 
-        const usuarioEncontrado = await User.findOne({ email });
-        const validarSenha = await bcrypt.compare(senha, emailEncontrado.senha);
+        const usuarioEncontrado = await User.findOne({ email });// encontra o usurio pelo email
+        const validarSenha = await bcrypt.compare(senha, usuarioEncontrado.senha);// encripta a senha e compara com a senha do banco encriptada
         if (!usuarioEncontrado || !validarSenha) {
             return res.status(401).send({ message: "E-mail ou senha invalido não encontrado!" });
         };
@@ -25,4 +25,4 @@ async function Login(req, res) {
     }
 }
 
-module.exports = Login;
+module.exports = {Login};
