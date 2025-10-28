@@ -18,5 +18,11 @@ const UserSchema = new mongoose.Schema({
         require: true,
         minlength: 8
     },
+    Roule:{
+        type: [String],
+        enum: ['USER', 'ADMIN'],
+        default: 'USER',
+        require: true
+    }
 })
  module.exports  = mongoose.model( "User", UserSchema);

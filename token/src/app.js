@@ -7,7 +7,7 @@ const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 
 mongoose.connect(
-    `mongodb+srv://${dbUser}_db_user:${dbPassword}@cluster0.dnupdb2.mongodb.net/Login?retryWrites=true&w=majority`)
+    `mongodb+srv://${dbUser}:${dbPassword}@cluster0.dnupdb2.mongodb.net/Usuario?retryWrites=true&w=majority`)
     
 const app = express();
 const port = 3000;
