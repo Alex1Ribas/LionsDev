@@ -21,6 +21,8 @@ export default {
       throw createError("E-mail já cadastrado", 409);
     }
 
+    const hashedPassaword = hashedPassaword(data.password)
+
     //cria e salva no banco de dados
     return repositotoy.create({
       name: data.name.trim(),
