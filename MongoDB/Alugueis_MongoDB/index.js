@@ -3,11 +3,8 @@ const mongoose = require("mongoose");
 const  dotenv = require("dotenv");
 
 dotenv.config();
-const db_user = process.env.DB_USER;
-const db_password = process.env.DB_PASSWORD;
 
-mongoose.connect(
-   `mongodb+srv://${db_user}_db_user:${db_password}@cluster0.dnupdb2.mongodb.net/?retryWrites=true&w=majority`)
+mongoose.connect(process.env.MONGODB_URI)
 
 const app = express();
 const port = 3000;
