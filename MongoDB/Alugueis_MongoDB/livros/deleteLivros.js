@@ -1,3 +1,5 @@
+const Book = require("./schemaLivros");
+
 const deleteLivro = async (id)=> {
     try{
         return await Book.findByIdAndDdelete(id);
