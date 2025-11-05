@@ -1,6 +1,6 @@
 const student = require("./schemaEstudantes");
 
-const updateEstudantes = async (nome, curso, ano, matricula) => {
+const updateEstudantes = async (id, nome, curso, ano, matricula) => {
     try{
         const updateEstudantes = await student.findByIdAndUpdate(
             id,

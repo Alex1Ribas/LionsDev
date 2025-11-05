@@ -9,9 +9,9 @@ const buscarAlugueis = require('../aluguel/buscarAlugueis');
 const addDevoluacao = require('../aluguel/addDevolução');
 
 router.get('/', listAlugueis);
-router.get('/busca', buscarAlugueis)
+router.get('/:id', buscarAlugueis)
 router.post('/', addAluguel);
-router.post('/devolucao/:id', addDevoluacao);
+router.post('/:id', addDevoluacao);
 router.put('/:id', updateAlugueis );
 router.delete('/:id', deleteAlugueis);
 
