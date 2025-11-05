@@ -1,6 +1,8 @@
+const Book = require("./schemaLivros");
+
 const updateLivros = async (id, title, author, year, genre) => {
     try{
-        const updateLivros = await book.findByIdAndUpdate(id,{title, author, year, genre},{new: true, runValidators: true}
+        const updateLivros = await Book.findByIdAndUpdate(id,{title, author, year, genre},{new: true, runValidators: true}
         );
         return updateLivros;
     } catch (error){
