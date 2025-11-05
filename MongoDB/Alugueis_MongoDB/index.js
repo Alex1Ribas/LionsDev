@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const  dotenv = require("dotenv");
 
 dotenv.config();
-
-mongoose.connect(process.env.DB_URI)
+const db_uri = process.env.DB_URI
+mongoose.connect(`${db_uri}`)
 
 const app = express();
 const port = 3000;
@@ -31,6 +31,6 @@ const rotaAluguel = require('./rotas/rotaAluguel');
   mongoose.connection.once("open", () =>{
     console.log("conectando ao mongoDB");
 });
-  mongoose.connection?.on('error', (err) =>{
+  mongoose.connection?.on('error', (error) =>{
     console.error(`Error to connect - MongoDB: Error: ${error.message}`);
 })
