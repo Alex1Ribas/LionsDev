@@ -5,7 +5,6 @@ const listLivros = require("../livros/listLivros");
 const addLivros = require("../livros/addLivros");
 const buscarLivros = require("../livros/buscarLivros");
 const updateLivros = require("../livros/updateLivros");
-// ✅ IMPORTAÇÃO FALTANDO — deleteLivro estava sendo usado mas não importado
 const deleteLivro = require("../livros/deleteLivros");
 
 /////////////////////////////////////////////////////////////
@@ -37,8 +36,6 @@ router.get("/busca", async (req, res) => {
 });
 
 /////////////////////////////////////////////////////////////
-// ✅ ADICIONADO try/catch no POST — se der erro dentro de addLivros(),
-// o servidor agora envia resposta em vez de travar.
 router.post("/", async (req, res) => {
   try {
     const { title, author, year, genre } = req.body;

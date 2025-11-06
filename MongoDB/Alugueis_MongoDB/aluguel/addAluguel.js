@@ -1,25 +1,19 @@
 
-const { id, alugueis } = require("../data/data");
+const Alugueis = require("./schemaAlugueis");
 
-const addAluguel = async(req, res) => {
+async function addAluguel(data){
     try{
-    if (!req.body.idLivro || !req.body.idEstudante || !req.body.dataLocacao) {
+    if (!data.idLivro || !data.idEstudante || !data.dataLocacao) {
         return res.status(400).send({
-            message: "Data de Locação, ID do estudante e ID do livro não podem estar vazios!"});
+            message: "Não foi encontrado informações validas!"});
         };
 
-    const novaLocacao = {
-        id: id.value,
-        idLivro: parseInt(req.body.idLivro),
-        idEstudante: parseInt(req.body.idEstudante),
-        dataLocacao: req.body.dataLocacao,
-        dataDevolucao: req.body.dataDevolucao
-    };
-
-
-    alugueis.push(novaLocacao);
-    id.value++;
-
+    const novaLocacao = await Alugueis.create({
+        idLivro,
+        idEstudante,
+        dataLocacao,
+        dataDevolucao
+    });
     res.status(201).send({ message: "Adicionado com sucesso!", aluguel: novaLocacao });
     } catch (error) {
         console.error("Erro ao adicionar aluguel:", error);
