@@ -4,10 +4,10 @@ import { ensureValidId } from "../middlewares/validate.middleware";
 
 const router = Router();
 
-router.post('/users', UserController.create);
-router.get('/users', UserController.list);
-router.get('/users/:id', ensureValidId, UserController.search);
-router.put('/user/:id', ensureValidId, UserController.update);
-router.delete('/users/:id', ensureValidId, UserController.remove);
+router.post('/', UserController.create);
+router.get('/', UserController.list);
+router.get('/:id', ensureValidId, UserController.search);
+router.put('/:id', ensureValidId, UserController.update);
+router.delete('/:id', ensureValidId, UserController.remove);
 
 export default router;
