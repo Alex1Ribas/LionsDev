@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const db_url = process.env.DB_URL;
 
-mongoose.connect(`${db_url}`)
+mongoose.connect(db_url)
     
 const app = express();
 const port = 3000;
@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 mongoose.connection.once('open', () => {
     console.log('Conectado ao MongoDB');
 });
-mongoose.connection?.on('error', (err) =>{
+mongoose.connection?.on('error', (error) =>{
     console.error(`Error to connect - MongoDB: Error: ${error.message}`);
 })
 app.listen(port, () => {

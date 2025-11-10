@@ -1,5 +1,6 @@
 import repositotoy from "../repositories/user.repository";
 import createError from "../utils/createError";
+import tokenGenerator from "..utils/tokenGenerator";
 
 //validação do preenchimento do body
 function ensureValidPayload({ name, email, password }) {
@@ -21,14 +22,43 @@ export default {
       throw createError("E-mail já cadastrado", 409);
     }
 
-    const hashedPassaword = hashedPassaword(data.password)
+    const hashedPassword = hashPassword(data.password);
 
-    //cria e salva no banco de dados
-    return repositotoy.create({
+    const user = await repo.create({
       name: data.name.trim(),
       email: data.email.trim().toLowerCase(),
-      password: data.password,
+      password: hashedPassword,
+      role: data.role || ["USER"],
     });
+
+    const token = tokenGenerator(user);
+
+    return { user, token };
+  },
+
+  async loginUser(data) {
+    if (!data?.email?.trim()) throw createError("Email cannot be blank.", 400);
+    if (!data?.password?.trim())
+      throw createError("Password cannot be blank.", 400);
+
+    const userDatabase = await repo.findByEmail(data.email);
+
+    if (!userDatabase) {
+      throw createError("User not found.", 404);
+    }
+
+    const validatePassword = compareHashedPassword(
+      data.password,
+      userDatabase.password
+    );
+
+    if (!validatePassword) {
+      throw createError("Invalid password.", 401);
+    }
+
+    const token = tokenGenerator(userDatabase);
+
+    return { user: userDatabase, token };
   },
 
   // função de listar usuarios //
