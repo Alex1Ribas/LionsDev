@@ -1,11 +1,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
-mongoose.connect("URL_mongoDb")
+const dotenv = require("dotenv");
+
+dotenv.config();
+const db_uri = process.env.DB_URI;
 
 const app = express();
+app.use(express.json());
+
+mongoose.connect(db_uri)
 const port = 3000;
 
-app.use(express.json());
 
 const Baralho = require("./baralho/rotaBaralho");
 const FlashCard = require("./flashcard/rotaFlashcard");
@@ -25,6 +30,6 @@ const FlashCard = require("./flashcard/rotaFlashcard");
   mongoose.connection.once("open", () =>{
     console.log("conectando ao mongoDB");
 });
-  mongoose.connection?.on('error', (err) =>{
+  mongoose.connection?.on('error', (error) =>{
     console.error(`Error to connect - MongoDB: Error: ${error.message}`);
 })
