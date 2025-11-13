@@ -1,6 +1,6 @@
 import express from 'express';
-import userRouter from './src/routes/user.routes'
-import errorMiddleware from './src/middlewares/error.middleware';
+import userRouter from './src/routes/user.routes.js'
+import errorMiddleware from './src/middlewares/error.middleware.js';
 
 const app = express();
 app.use(express.json());

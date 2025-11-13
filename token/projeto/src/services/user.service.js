@@ -1,8 +1,8 @@
-import repositotoy from "../repositories/user.repository";
-import createError from "../utils/createError";
-import tokenGenerator from "..utils/tokenGenerator";
+import repository from "../repositories/user.repository.js";
+import createError from "../utils/createError.js";
+import tokenGenerator from "../utils/tokenGenerator.js";
+import {hashPassword, compareHash} from "../utils/hashPassword.js"
 
-//validação do preenchimento do body
 function ensureValidPayload({ name, email, password }) {
   if (!name?.trim()) throw createError("Nome é obrigatorio", 400);
   if (!email?.trim()) throw createError("E-mail é obrigatório.", 400);
@@ -10,25 +10,22 @@ function ensureValidPayload({ name, email, password }) {
   if (!password) throw createError("Senha é obrigatória.", 400);
 }
 
-//inicio da exportação
 export default {
-  // funçado de criação do Usuario //
-  async ceateUser(data) {
-    ensureValidPayload(data); //valida se os dados foram preenchidos
+  async createUser(data) {
+    ensureValidPayload(data);
 
-    // verifica duplicidade do email no banco de dados
-    const duplicate = await repositotoy.findByEmail(data.email);
+    const duplicate = await repository.findByEmail(data.email);
     if (duplicate) {
       throw createError("E-mail já cadastrado", 409);
     }
 
-    const hashedPassword = hashPassword(data.password);
+    const hashedPassword = await hashPassword(data.password);
 
-    const user = await repo.create({
-      name: data.name.trim(),
+    const user = await repository.create({
+      name: data.name.trim().toLowerCase(),
       email: data.email.trim().toLowerCase(),
       password: hashedPassword,
-      role: data.role || ["USER"],
+      Role: data.Role || "USER",
     });
 
     const token = tokenGenerator(user);
@@ -37,86 +34,76 @@ export default {
   },
 
   async loginUser(data) {
-    if (!data?.email?.trim()) throw createError("Email cannot be blank.", 400);
-    if (!data?.password?.trim())
-      throw createError("Password cannot be blank.", 400);
+    if (!data?.email?.trim()) throw createError("Email não pode permanecer vazio!", 400);
+    if (!data?.password?.trim()) throw createError("Senha não pode permanecer vazia!", 400);
 
-    const userDatabase = await repo.findByEmail(data.email);
+    const userDatabase = await repository.findByEmail(data.email);    
 
     if (!userDatabase) {
       throw createError("User not found.", 404);
     }
 
-    const validatePassword = compareHashedPassword(
-      data.password,
-      userDatabase.password
-    );
+    const validatePassword = await compareHash(data.password, userDatabase.password);
 
     if (!validatePassword) {
       throw createError("Invalid password.", 401);
     }
 
-    const token = tokenGenerator(userDatabase);
+    const token = tokenGenerator(userDatabase);    
 
-    return { user: userDatabase, token };
+    return { message: "Login efetuado com sucesso!", token: token, id: userDatabase._id};
   },
 
-  // função de listar usuarios //
   async listUser() {
-    return repositotoy.findAll();
+    return repository.findAll();
   },
 
-  // funcçao buscar unico usuario //
-  async searchUser(id) {
-    const user = await repositotoy.findeById(id);
+  async searchUser(id) {    
+    const user = await repository.findById(id.id);
     if (!user) {
       throw createError("Usuario não encontrado", 404);
     }
     return user;
   },
 
-  // função de atualização de ususario //
   async updateUser(id, data) {
-    const payload = { ...data }; // recebe as requisições do body ja verificando se não tem informação duplicada informada
+    const payload = { ...data }; 
 
-    //valida se o email foi preenchido de forma correta incluindo arroba
     if (payload.email) {
       if (!payload.email.includes("@")) {
         throw createError("E-mail inválido.", 400);
       }
 
-      // valida se o email atualizado já nao esta cadastrado
-      const existing = await repositotoy.findByEmail(payload.email);
-      if (existing && existing.id !== id) {
+      const existing = await repository.findByEmail(payload.email);
+      if (existing && existing.id !== id.id) {
         throw createError("E-mail já cadastrado", 409);
       }
       payload.email = payload.email.trim().toLowerCase();
     }
 
-    //remove espçaos extras do nome
-    if (payload.email) {
+    if (payload.name) {
       payload.name = payload.name.trim();
     }
-
-    // coloca os dados(payload) em fromato de array por tras dos panos para cosneguir usar o forEach e se ele for indefinido é excluido
+    
+    
     Object.keys(payload).forEach((key) => {
       if (payload[key] === undefined) delete payload[key];
     });
-
-    // verifica se os dados de atualização estão vazios
+    
     if (Object.keys(payload).length === 0) {
       throw createError("Nenhum campo para atualizar", 400);
     }
 
-    // valida se a função conseguiu encontrar o ususario ou solta o erro
-    const update = await repositotoy.updateById(id, payload);
+    const update = await repository.updateById(id.id, payload);
     if (!update) throw createError("Usuario não encontrado", 404);
-    return update;
+    return {message: "Atualizado com sucesso!", update};
   },
 
-  // valida se a função conseguiu encontrar o ususario ou solta o erro
   async removeuser(id) {
-    const deleteID = repositotoy.deleteById(id);
+    const deleteID = await repository.deleteById(id.id);
     if (!deleteID) throw createError("Usuario não encontrado", 404);
+    return {message: "Usuario deletado com sucesso!", deleteID}
   },
 };
+
+

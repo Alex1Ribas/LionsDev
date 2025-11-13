@@ -1,20 +1,25 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import createError from "./createError.js";
 
 dotenv.config();
 
-export function tokenGenerator(data) {
+export default function tokenGenerator(data) {
   const payload = {
     _id: data._id,
     email: data.email,
-    role: data.role,
+    Role: data.Role,
   };
 
-  return jwt.sign(payload, process.env.JWT_SECRET_KEY, {
+  return jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRATION,
   });
 }
 
 export function tokenValidation(token) {
-  return jwt.verify(token, process.env.JWT_SECRET_KEY);
+  try {
+    return jwt.verify(token, process.env.JWT_SECRET);
+  } catch (err) {
+    throw createError("Token inválido ou expirado.", 401);
+  }
 }

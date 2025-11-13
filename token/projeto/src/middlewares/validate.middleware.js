@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import createError from "../utils/createErro";
+import createError from "../utils/createError.js";
 
-export function ensureValidId(req, res, next) {
-  if (!mongoose.Types.objectId.IsValid(req.params.id)) {
-    throw createError("ID invalido", 400);
-  } 
+export function ensureValidId(req, _res, next) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return next(createError("ID inválido", 400));
+  }
   next();
 }

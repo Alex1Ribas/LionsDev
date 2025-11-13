@@ -4,12 +4,12 @@ import connect from './src/config/db.js';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 
 (async () =>{
-    try{
+    try{        
         await connect(process.env.MONGODB_URI);
-        app.listen(PORT,() => console.log(`API rodando em: http//localhost:${PORT}`));
+        app.listen(port,() => console.log(`API rodando em: http//localhost:${port}`));
     } catch(error){
         console.error('Erro ao conectar ao banco de dados ou ao iniciar o servidor', error);
         process.exit(1);

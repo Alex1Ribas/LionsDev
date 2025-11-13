@@ -1,4 +1,4 @@
-import User from '../models/user.model';
+import User from '../models/user.model.js';
 
 export default{
     create(data){
@@ -7,18 +7,16 @@ export default{
     findAll(){
         return User.find();
     },
-    findeById(id){
-        return User.findeById(id);
+    findById(id){
+        return User.findById(id);
     },
     updateById(id, data){
-        return User.updateByIdAndUpdate(id,data, {new: true, runValidators: true});
+        return User.findByIdAndUpdate(id,data, {new: true, runValidators: true});
     },
     deleteById(id){
-        return User.findeByIdAndDelete(id);
+        return User.findByIdAndDelete(id);
     },
     findByEmail(email){
-        return User.findOne({email})
+        return User.findOne({ email }).select('+password');
     },
 };
-
-//usa model mongoose a prtir do Schema para executar uma função, arquivo baseado no CRUD
