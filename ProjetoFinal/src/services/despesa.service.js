@@ -1,27 +1,26 @@
 import despesaRepository from "../repositories/despesa.repository.js";
-function ensureValidPayload({
+import createError from "../utils/createError.js";
+
+const ensureValidPayload = (
   dataSaida,
   valor,
   metodo,
   destinatario,
-  descricao,
-}) {
+  descricao
+) => {
   if (!dataSaida) throw createError("Data de saida é obrigatória.", 400);
   if (!valor) throw createError("Valor é obrigatório.", 400);
   if (!metodo) throw createError("Método é obrigatório.", 400);
   if (!destinatario) throw createError("destinatario é obrigatório.", 400);
   if (!descricao) throw createError("Descrição é obrigatória.", 400);
-}
+};
 
 export default {
   async criardespesa(data) {
     ensureValidPayload(data);
 
     if (data.dataSaida.length !== 10) {
-      throw createError(
-        "Data de saida deve estar no formato dd/mm/aaaa.",
-        400
-      );
+      throw createError("Data de saida deve estar no formato dd/mm/aaaa.", 400);
     }
     if (data.valor <= 0) {
       throw createError("O valor da despesa deve ser maior que zero.", 400);
