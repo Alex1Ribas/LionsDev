@@ -1,4 +1,4 @@
-import repository from "../repositories/user.repository.js";
+import repositoryUser from "../repositories/user.repository.js";
 import createError from "../utils/createError.js";
 import tokenGenerator from "../utils/tokenGenerator.js";
 import {hashPassword, compareHash} from "../utils/hashPassword.js"
@@ -14,14 +14,14 @@ export default {
   async createUser(data) {
     ensureValidPayload(data);
 
-    const duplicate = await repository.findByEmail(data.email);
+    const duplicate = await repositoryUser.findByEmail(data.email);
     if (duplicate) {
       throw createError("E-mail já cadastrado", 409);
     }
 
     const hashedPassword = await hashPassword(data.password);
 
-    const user = await repository.create({
+    const user = await repositoryUser.create({
       name: data.name.trim().toLowerCase(),
       email: data.email.trim().toLowerCase(),
       password: hashedPassword,
@@ -37,7 +37,7 @@ export default {
     if (!data?.email?.trim()) throw createError("Email não pode permanecer vazio!", 400);
     if (!data?.password?.trim()) throw createError("Senha não pode permanecer vazia!", 400);
 
-    const userDatabase = await repository.findByEmail(data.email);    
+    const userDatabase = await repositoryUser.findByEmail(data.email);    
 
     if (!userDatabase) {
       throw createError("User not found.", 404);
@@ -55,11 +55,11 @@ export default {
   },
 
   async listUser() {
-    return repository.findAll();
+    return repositoryUser.findAll();
   },
 
   async searchUser(id) {    
-    const user = await repository.findById(id.id);
+    const user = await repositoryUser.findById(id.id);
     if (!user) {
       throw createError("Usuario não encontrado", 404);
     }
@@ -74,7 +74,7 @@ export default {
         throw createError("E-mail inválido.", 400);
       }
 
-      const existing = await repository.findByEmail(payload.email);
+      const existing = await repositoryUser.findByEmail(payload.email);
       if (existing && existing.id !== id.id) {
         throw createError("E-mail já cadastrado", 409);
       }
@@ -94,13 +94,13 @@ export default {
       throw createError("Nenhum campo para atualizar", 400);
     }
 
-    const update = await repository.updateById(id.id, payload);
+    const update = await repositoryUser.updateById(id.id, payload);
     if (!update) throw createError("Usuario não encontrado", 404);
     return {message: "Atualizado com sucesso!", update};
   },
 
   async removeuser(id) {
-    const deleteID = await repository.deleteById(id.id);
+    const deleteID = await repositoryUser.deleteById(id.id);
     if (!deleteID) throw createError("Usuario não encontrado", 404);
     return {message: "Usuario deletado com sucesso!", deleteID}
   },
