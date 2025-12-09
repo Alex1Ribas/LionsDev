@@ -16,7 +16,7 @@ export default{
     deleteById(id){
         return Relatorio.findByIdAndDelete(id);
     },
-    findByEmail(email){
-        return Relatorio.findOne({ email }).select('+password');
+    findByType(tipo){
+        return Relatorio.findOne({ tipo });
     },
 };
