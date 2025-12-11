@@ -1,6 +1,6 @@
+import { parse } from "date-fns";
 import relatorioRepository from "../repositories/relatorio.repository.js";
 import createError from "../utils/createError.js";
-
 
 const validarRelatorio = (
   user,
@@ -21,11 +21,23 @@ const validarRelatorio = (
 export default {
   async criarRelatorio(data) {
     validarRelatorio(data);
-
+    if (
+      !isValid(
+        parse(data.periodoInicio || data.periodoFim, "dd/MM/yyyy", new Date())
+      )
+    ) {
+      throw createError("formato das datas deve ser: dd/mm/yyyy", 400);
+    }
     if (data.periodoInicio >= dados.periodoFim)
-      throw createError("Período de início deve ser anterior ao período de fim", 400);
+      throw createError(
+        "Período de início deve ser anterior ao período de fim",
+        400
+      );
     if (data.receitas.length === 0 && dados.despesas.length === 0)
-      throw createError("Relatório deve conter ao menos uma receita ou despesa", 400);
+      throw createError(
+        "Relatório deve conter ao menos uma receita ou despesa",
+        400
+      );
 
     return await relatorioRepository.create(data);
   },

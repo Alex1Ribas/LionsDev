@@ -1,4 +1,5 @@
 import receitaRepository from "../repositories/receita.repository.js";
+import { parse, isValid } from "date-fns";
 import createError from "../utils/createError.js";
 
 function ensureValidPayload({
@@ -19,7 +20,7 @@ export default {
   async criarReceita(data) {
     ensureValidPayload(data);
 
-    if (data.dataEntrada.length !== 10) {
+    if (!isValid(parse(data.dataEntrada, "dd/MM/yyyy", new Date()))) {
       throw createError(
         "Data de entrada deve estar no formato dd/mm/aaaa.",
         400
@@ -27,6 +28,9 @@ export default {
     }
     if (data.valor <= 0) {
       throw createError("O valor da receita deve ser maior que zero.", 400);
+    }
+    if (!parseFloat(data.valor)) {
+      throw createError("o valor deve ser um numero!", 400);
     }
     if (data.descricao.length < 20) {
       throw createError("A descrição deve ter no mínimo 20 caracteres.", 400);

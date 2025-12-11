@@ -16,7 +16,7 @@ export default{
     deleteById(id){
         return Despesa.findByIdAndDelete(id);
     },
-    findByEmail(email){
-        return Despesa.findOne({ email }).select('+password');
+    findByDestinatario(destinatario){
+        return Despesa.findOne({ destinatario }).select('+password');
     },
 };

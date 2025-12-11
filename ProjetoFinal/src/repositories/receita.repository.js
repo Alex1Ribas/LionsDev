@@ -16,7 +16,7 @@ export default{
     deleteById(id){
         return Receita.findByIdAndDelete(id);
     },
-    findByEmail(email){
-        return Receita.findOne({ email }).select('+password');
+    findByPagante(pagante){
+        return Receita.findOne({ pagante }).select('+password');
     },
 };

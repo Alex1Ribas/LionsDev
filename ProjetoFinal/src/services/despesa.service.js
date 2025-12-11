@@ -1,4 +1,5 @@
 import despesaRepository from "../repositories/despesa.repository.js";
+import { parse, isValid } from "date-fns";
 import createError from "../utils/createError.js";
 
 const ensureValidPayload = (
@@ -19,11 +20,14 @@ export default {
   async criardespesa(data) {
     ensureValidPayload(data);
 
-    if (data.dataSaida.length !== 10) {
+    if (!isValid(parse(data.dataSaida, "dd/MM/yyyy", new Date()))) {
       throw createError("Data de saida deve estar no formato dd/mm/aaaa.", 400);
     }
     if (data.valor <= 0) {
       throw createError("O valor da despesa deve ser maior que zero.", 400);
+    }
+    if (!parseFloat(data.valor)) {
+      throw createError("O valor precisa ser um número!", 400);
     }
     if (data.descricao.length < 20) {
       throw createError("A descrição deve ter no mínimo 20 caracteres.", 400);
