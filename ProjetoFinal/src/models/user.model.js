@@ -6,6 +6,8 @@ const UserSchema = new mongoose.Schema({
     sector:  {type: String, require:true, trim: true},
     email:   {type: String, require:true, trim: true, unique: true, lowerase: true},
     password:{type: String, require:true, select: false },
+    confPassword:{type: String, require:true, select: false },
+
     Role:    {type: String, enum: ["ADMIN", "USER"], default: "USER"}
 }, {timestamps: true});
 
