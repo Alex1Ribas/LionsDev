@@ -1,11 +1,16 @@
 import mongoose from 'mongoose';
 
-const receitaSchema = new mongoose.Schema({
-    dataEntrada: {type: String, require: true, trim: true},
-    valor: {type: Number, require: true, trim: true},
-    metodo: { type: String, enum: ["DINHEIRO", "CARTÃO DE CRÉDITO", "CARTÃO DE DÉBITO", "TRANSFERÊNCIA", "BOLETO"], require: true },  
-    pagante: {type: String, require: true, trim: true},
-    descricao: {type: String, require: true, trim: true},
+const ReceitaSchema = new mongoose.Schema({
+    dataEntrada:{type: String, require: true, trim: true},
+    valor:      {type: Number, require: true, trim: true},
+    pagante:    {type: String, require: true, trim: true},
+    descricao:  {type: String, require: true, trim: true},
+    status: {type: String, require: true, enum:[
+        "Ativo", "Atrasada", "Quitada" 
+    ]},
+    metodo:      {type: String, require: true, enum: [
+        "DINHEIRO", "PIX", "CARTÃO DE CRÉDITO", "CARTÃO DE DÉBITO", "TRANSFERÊNCIA", "BOLETO"
+    ], require: true },  
 }, { timestamps: true });
 
-export default mongoose.model('Receita', receitaSchema);
+export default mongoose.model('Receita', ReceitaSchema);
