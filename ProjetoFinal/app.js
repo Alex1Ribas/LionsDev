@@ -1,7 +1,7 @@
 import express from "express";
 import userRouter from "./src/routes/user.routes.js";
 import receitaRouter from "./src/routes/receita.routes.js";
-import despesaRouter from "./src/routes/despesa.routes.js";
+import despesaRouter from "./src/routes/despesa.routes.js"
 import relatorioRouter from "./src/routes/relatorio.routes.js";
 import errorMiddleware from "./src/middlewares/error.middleware.js";
 
