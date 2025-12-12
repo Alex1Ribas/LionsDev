@@ -3,11 +3,13 @@ import createError from "../utils/createError.js";
 import tokenGenerator from "../utils/tokenGenerator.js";
 import { hashPassword, compareHash } from "../utils/hashPassword.js";
 
-function ensureValidPayload({ name, email, password }) {
+function ensureValidPayload({ name, email, password, confPassword }) {
   if (!name?.trim()) throw createError("Nome é obrigatorio", 400);
   if (!email?.trim()) throw createError("E-mail é obrigatório.", 400);
   if (!email.includes("@")) throw createError("E-mail inválido.", 400);
   if (!password) throw createError("Senha é obrigatória.", 400);
+  if (!confPassword)
+    throw createError("A confirmação de senha é obrigatória.", 400);
 }
 
 export default {
@@ -20,6 +22,7 @@ export default {
     }
     if (password.length < 8)
       throw createError("A senha precisa ter pelo menos 8 caracteres!", 400);
+    if (confPassword !== password) {"As senhas não conhecidem!", 400};
 
     const hashedPassword = await hashPassword(data.password);
 
