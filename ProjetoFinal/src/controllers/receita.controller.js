@@ -22,7 +22,7 @@ export const receitaController = {
 
   async search(req, res, next) {
     try {
-      const result = await receitaService.buscarReceitaPorPagante(req.params);
+      const result = await receitaService.buscarReceita(req.params);
       return res.json(result);
     } catch (err) {
       return next(err);
