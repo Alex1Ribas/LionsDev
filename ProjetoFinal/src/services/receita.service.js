@@ -51,7 +51,7 @@ export default {
     if (receitas.length === 0) {
       throw createError("Nenhuma receita encontrada.", 404);
     }
-    return receitasOrdenadas;
+    return receitas;
   },
 
   async buscarReceita(id) {
