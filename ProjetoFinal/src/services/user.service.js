@@ -20,9 +20,9 @@ export default {
     if (duplicate) {
       throw createError("E-mail já cadastrado", 409);
     }
-    if (password.length < 8)
+    if (data.password.length < 8)
       throw createError("A senha precisa ter pelo menos 8 caracteres!", 400);
-    if (confPassword !== password) {"As senhas não conhecidem!", 400};
+    if (data.confPassword !== data.password) {"As senhas não conhecidem!", 400};
 
     const hashedPassword = await hashPassword(data.password);
 

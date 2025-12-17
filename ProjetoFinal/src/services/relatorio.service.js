@@ -2,18 +2,10 @@ import { parse } from "date-fns";
 import relatorioRepository from "../repositories/relatorio.repository.js";
 import createError from "../utils/createError.js";
 
-const validarRelatorio = (
-  user,
-  receitas,
-  despesas,
-  periodoInicio,
-  periodoFim
-) => {
+const validarRelatorio = (user, tipo, periodoInicio, periodoFim) => {
   if (!user) throw createError("Usuário é obrigatório", 400);
-  if (!receitas || !Array.isArray(receitas))
-    throw createError("Receitas devem ser um array válido", 400);
-  if (!despesas || !Array.isArray(despesas))
-    throw createError("Despesas devem ser um array válido", 400);
+  if (!tipo)
+    throw createError("Deve ser escolhido um tipo: receita/despesa", 400);
   if (!periodoInicio) throw createError("Período de início é obrigatório", 400);
   if (!periodoFim) throw createError("Período de fim é obrigatório", 400);
 };
@@ -28,14 +20,9 @@ export default {
     ) {
       throw createError("formato das datas deve ser: dd/mm/yyyy", 400);
     }
-    if (data.periodoInicio >= dados.periodoFim)
+    if (data.periodoInicio >= data.periodoFim)
       throw createError(
         "Período de início deve ser anterior ao período de fim",
-        400
-      );
-    if (data.receitas.length === 0 && dados.despesas.length === 0)
-      throw createError(
-        "Relatório deve conter ao menos uma receita ou despesa",
         400
       );
 
