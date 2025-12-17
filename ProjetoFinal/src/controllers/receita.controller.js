@@ -1,10 +1,10 @@
 import receitaService from "../services/receita.service.js";
 
 export const receitaController = {
-
   async create(req, res, next) {
     try {
-      const result = await receitaService.criarReceita(req.body);
+      const user = req.user;
+      const result = await receitaService.criarReceita({ ...req.body, user });
       return res.status(201).json(result);
     } catch (err) {
       return next(err);
@@ -13,7 +13,8 @@ export const receitaController = {
 
   async list(req, res, next) {
     try {
-      const result = await receitaService.listarReceitas();
+      const user = req.user;
+      const result = await receitaService.listarReceitas({ user });
       return res.json(result);
     } catch (err) {
       return next(err);
@@ -22,7 +23,11 @@ export const receitaController = {
 
   async search(req, res, next) {
     try {
-      const result = await receitaService.buscarReceita(req.params);
+      const user = req.user;
+      const result = await receitaService.buscarReceita({
+        ...req.params,
+        user,
+      });
       return res.json(result);
     } catch (err) {
       return next(err);
@@ -31,7 +36,12 @@ export const receitaController = {
 
   async update(req, res, next) {
     try {
-      const result = await receitaService.atualizarReceita(req.params, req.body);
+      const user = req.user;
+      const result = await receitaService.atualizarReceita({
+        ...req.params,
+        ...req.body,
+        user,
+      });
       return res.json(result);
     } catch (err) {
       return next(err);
@@ -40,7 +50,11 @@ export const receitaController = {
 
   async remove(req, res, next) {
     try {
-      const result = await receitaService.deletarReceita(req.params);
+      const user = req.user;
+      const result = await receitaService.deletarReceita({
+        ...req.params,
+        user,
+      });
       return res.json(result);
     } catch (err) {
       return next(err);
