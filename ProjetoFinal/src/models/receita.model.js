@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const ReceitaSchema = new mongoose.Schema({
     user:       {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, 
-    dataEntrada:{type: Date, require: true}, 
+    dataEntrada:{type: String, require: true}, 
     valor:      {type: Number, require: true, trim: true},
     pagante:    {type: String, require: true, trim: true},
     descricao:  {type: String, require: true, trim: true},

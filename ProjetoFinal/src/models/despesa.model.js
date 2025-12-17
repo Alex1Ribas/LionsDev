@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const DespesaSchema = new mongoose.Schema({
     user:        {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    dataSaida:   {type: Date, require: true}, 
+    dataSaida:   {type: String, require: true}, 
     valor:       {type: Number, require: true, trim: true},
     destinatario:{type: String, require: true, trim: true},
     descricao:   {type: String, require: true, trim: true},
