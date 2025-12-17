@@ -50,6 +50,7 @@ export const despesaController = {
 
   async remove(req, res, next) {
     try {
+      const user = req.user;
       const result = await despesaService.deletarDespesa({
         ...req.params,
         user,
