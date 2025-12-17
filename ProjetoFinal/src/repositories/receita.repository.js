@@ -11,12 +11,9 @@ export default{
         return Receita.findById(id);
     },
     updateById(id, data){
-        return Receita.findByIdAndUpdate(id,data, {new: true, runValidators: true});
+        return Receita.findByIdAndUpdate(id, {$set: data}, {new: true, runValidators: true});
     },
     deleteById(id){
         return Receita.findByIdAndDelete(id);
-    },
-    findByPagante(pagante){
-        return Receita.findOne({ pagante }).select('+password');
     },
 };

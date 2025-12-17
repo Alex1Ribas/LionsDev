@@ -16,7 +16,4 @@ export default{
     deleteById(id){
         return Relatorio.findByIdAndDelete(id);
     },
-    findByType(tipo){
-        return Relatorio.findOne({ tipo });
-    },
 };
