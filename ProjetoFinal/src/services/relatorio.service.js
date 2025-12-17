@@ -1,51 +1,90 @@
-import { parse } from "date-fns";
-import relatorioRepository from "../repositories/relatorio.repository.js";
+import {
+  parse,
+  isValid,
+  isAfter,
+  isWithinInterval,
+  startOfDay,
+  endOfDay,
+} from "date-fns";
+import receitaRepository from "../repositories/receita.repository.js";
+import despesaRepository from "../repositories/despesa.repository.js";
 import createError from "../utils/createError.js";
 
-const validarRelatorio = (user, tipo, periodoInicio, periodoFim) => {
-  if (!user) throw createError("Usuário é obrigatório", 400);
-  if (!tipo)
-    throw createError("Deve ser escolhido um tipo: receita/despesa", 400);
-  if (!periodoInicio) throw createError("Período de início é obrigatório", 400);
-  if (!periodoFim) throw createError("Período de fim é obrigatório", 400);
-};
-
 export default {
-  async criarRelatorio(data) {
-    validarRelatorio(data);
-    if (
-      !isValid(
-        parse(data.periodoInicio || data.periodoFim, "dd/MM/yyyy", new Date())
-      )
-    ) {
-      throw createError("formato das datas deve ser: dd/mm/yyyy", 400);
+  async create(data) {
+    const { user, tipo, periodoInicio, periodoFim } = data;
+
+    if (!tipo || !periodoInicio || !periodoFim) {
+      throw createError("Tipo e períodos são obrigatórios", 400);
     }
-    if (data.periodoInicio >= data.periodoFim)
+
+    const dataInicio = startOfDay(
+      parse(periodoInicio, "dd/MM/yyyy", new Date())
+    );
+    const dataFim = endOfDay(parse(periodoFim, "dd/MM/yyyy", new Date()));
+
+    if (!isValid(dataInicio) || !isValid(dataFim)) {
+      throw createError("Formato de data inválido. Use dia/mês/ano", 400);
+    }
+
+    if (isAfter(dataInicio, dataFim)) {
       throw createError(
-        "Período de início deve ser anterior ao período de fim",
+        "A data de início não pode ser depois da data de fim",
         400
       );
+    }
 
-    return await relatorioRepository.create(data);
-  },
+    const tipoRelatorio = tipo.toLowerCase();
 
-  async listarRelatorio() {
-    return await relatorioRepository.findAll();
-  },
+    const resultadoFinal = {};
 
-  async buscarRelatorio(id) {
-    if (!id) throw createError("ID é obrigatório", 400);
-    return await relatorioRepository.findById(id);
-  },
+    if (tipoRelatorio === "receita" || tipoRelatorio === "lucro") {
+      const receitasDoBanco = await receitaRepository.findByUser(user);
+      const somaReceita = receitasDoBanco.reduce((acumulador, registro) => {
+        if (!registro.dataEntrada || typeof registro.dataEntrada !== "string")
+          return acumulador;
+        const dataDoRegistro = parse(
+          registro.dataEntrada,
+          "dd/MM/yyyy",
+          new Date()
+        );
+        return isWithinInterval(dataDoRegistro, {
+          start: dataInicio,
+          end: dataFim,
+        })
+          ? acumulador + (registro.valor || 0)
+          : acumulador;
+      }, 0);
 
-  async atualizarRelatorio(id, dados) {
-    if (!id) throw createError("ID é obrigatório", 400);
-    validarRelatorio(dados);
-    return await relatorioRepository.updateById(id, dados);
-  },
+      resultadoFinal.totalReceita = somaReceita;
+    }
 
-  async deletarRelatorio(id) {
-    if (!id) throw createError("ID é obrigatório", 400);
-    return await relatorioRepository.deleteById(id);
+    if (tipoRelatorio === "despesa" || tipoRelatorio === "lucro") {
+      const despesasDoBanco = await despesaRepository.findByUser(user);
+      const somaDespesa = despesasDoBanco.reduce((acumulador, registro) => {
+        if (!registro.dataSaida || typeof registro.dataSaida !== "string")
+          return acumulador;
+        const dataDoRegistro = parse(
+          registro.dataSaida,
+          "dd/MM/yyyy",
+          new Date()
+        );
+        return isWithinInterval(dataDoRegistro, {
+          start: dataInicio,
+          end: dataFim,
+        })
+          ? acumulador + (registro.valor || 0)
+          : acumulador;
+      }, 0);
+
+      resultadoFinal.totalDespesa = somaDespesa;
+    }
+
+    if (tipoRelatorio === "lucro") {
+      resultadoFinal.lucroLiquido =
+        (resultadoFinal.totalReceita || 0) - (resultadoFinal.totalDespesa || 0);
+    }
+
+    return resultadoFinal;
   },
 };
