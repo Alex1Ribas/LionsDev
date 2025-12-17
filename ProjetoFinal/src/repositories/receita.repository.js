@@ -10,6 +10,9 @@ export default{
     findById(id){
         return Receita.findById(id);
     },
+    findByUser(user) {
+    return Receita.find({user}).lean();
+    },
     updateById(id, data){
         return Receita.findByIdAndUpdate(id, {$set: data}, {new: true, runValidators: true});
     },

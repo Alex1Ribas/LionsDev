@@ -10,6 +10,9 @@ export default{
     findById(id){
         return Despesa.findById(id);
     },
+    findByUser(user) {
+        return Despesa.find({user}).lean();
+        },
     updateById(id, data){
         return Despesa.findByIdAndUpdate(id, {$set: data}, {new: true, runValidators: true});
     },
