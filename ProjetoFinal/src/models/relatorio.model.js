@@ -2,17 +2,14 @@ import mongoose from "mongoose";
 
 const RelatorioSchema = new mongoose.Schema(
   {
-    periodoInicio:{type: String, require: true, trim: true },
-    periodoFim:   {type: String, require: true, trim: true },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    user:     {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     tipo: {
-      enum: [
-        { type: mongoose.Schema.Types.ObjectId, ref: "Receita" },
-        { type: mongoose.Schema.Types.ObjectId, ref: "Despesa" },
-      ],
-    },
-  },
-  { timestamps: true }
+    type: String, enum: ["Receita", "Despesa", "Lucro"], required: true,
+   },
+    dataInicio:{type: String, require: true, trim: true },
+    dataFinal: {type: String, require: true, trim: true },
+    resultados:{type: []},
+  }, { timestamps: true }
 );
 
 export default mongoose.model("Relatorio", RelatorioSchema);
