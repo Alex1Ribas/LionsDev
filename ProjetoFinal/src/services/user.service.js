@@ -33,9 +33,7 @@ export default {
       Role: data.Role,
     });
 
-    const token = tokenGenerator(user);
-
-    return { message: "Usuário criado com sucesso!", user, token };
+    return { message: "Usuário criado com sucesso!", user, };
   },
 
   async loginUser(data) {
