@@ -40,9 +40,9 @@ export default {
 
     if (tipoRelatorio === "receita" || tipoRelatorio === "lucro") {
       const receitasDoBanco = await receitaRepository.findByUser(user);
-      const somaReceita = receitasDoBanco.reduce((acumulador, registro) => {
-        if (!registro.dataEntrada || typeof registro.dataEntrada !== "string")
-          return acumulador;
+      const somaReceita = receitasDoBanco.reduce((acumulado, registro) => {
+        if (!registro.dataEntrada)
+          return acumulado;
         const dataDoRegistro = parse(
           registro.dataEntrada,
           "dd/MM/yyyy",
@@ -52,8 +52,8 @@ export default {
           start: dataInicio,
           end: dataFim,
         })
-          ? acumulador + (registro.valor || 0)
-          : acumulador;
+          ? acumulado + (registro.valor || 0)
+          : acumulado;
       }, 0);
 
       resultadoFinal.totalReceita = somaReceita;
@@ -61,9 +61,9 @@ export default {
 
     if (tipoRelatorio === "despesa" || tipoRelatorio === "lucro") {
       const despesasDoBanco = await despesaRepository.findByUser(user);
-      const somaDespesa = despesasDoBanco.reduce((acumulador, registro) => {
+      const somaDespesa = despesasDoBanco.reduce((acumulado, registro) => {
         if (!registro.dataSaida || typeof registro.dataSaida !== "string")
-          return acumulador;
+          return acumulado;
         const dataDoRegistro = parse(
           registro.dataSaida,
           "dd/MM/yyyy",
@@ -73,8 +73,8 @@ export default {
           start: dataInicio,
           end: dataFim,
         })
-          ? acumulador + (registro.valor || 0)
-          : acumulador;
+          ? acumulado + (registro.valor || 0)
+          : acumulado;
       }, 0);
 
       resultadoFinal.totalDespesa = somaDespesa;
