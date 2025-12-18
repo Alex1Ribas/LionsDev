@@ -41,8 +41,7 @@ export default {
     if (tipoRelatorio === "receita" || tipoRelatorio === "lucro") {
       const receitasDoBanco = await receitaRepository.findByUser(user);
       const somaReceita = receitasDoBanco.reduce((acumulado, registro) => {
-        if (!registro.dataEntrada)
-          return acumulado;
+        if (!registro.dataEntrada || typeof registro.dataEntrada !== 'string') return acumulado;
         const dataDoRegistro = parse(
           registro.dataEntrada,
           "dd/MM/yyyy",
