@@ -1,143 +1,120 @@
-```markdown
-# 🦁 LionsDev - Repositório de Exercícios e Projetos
+# 🦁 LionsDev - Repositório de Exercícios e Projetos Node.js & MongoDB
 
-Este repositório contém todos os arquivos e projetos que desenvolvi ao longo do curso da **LionsDev**. Aqui você encontrará trabalhos por módulo, projetos finais e exemplos de soluções que fiz durante as aulas.
+## Overview
+This repository documents my **full backend development journey**, covering **10 modules of progressive learning** and a **fullstack TCC project**.  
 
----
+From **basic JavaScript logic and CLI exercises** to **database-driven applications with Express, MongoDB, JWT authentication, and frontend integration**, this portfolio demonstrates **structured learning, problem-solving, and professional application development**.
 
-## 📁 Estrutura do Repositório
-
-A estrutura deste repositório está dividida em pastas que representam módulos ou projetos práticos criados no decorrer do curso:
-
-```
-
-LionsDev/
-├── Clinica/
-├── E_Sports/
-├── Express/
-├── FlashCards/
-├── Gerenciamento_Usuarios/
-├── MongoDB/
-├── ProjetoFinal/
-├── TypeScript/
-├── lions-dev-arquiterua/
-├── modulo_1/
-├── modulo_2/
-├── token/
-
-````
-
-Cada pasta contém exercícios, implementações ou projetos relacionados à fase específica do curso ou à tecnologia estudada.
+The projects are organized in modules to show **step-by-step evolution**, making it clear how I progressed from fundamentals to full production-ready systems.
 
 ---
 
-## 📌 Sobre os Projetos
+## What You Will Find
 
-### 🏥 **Clinica**
-Projeto focado em lógica de backend para um sistema de clínica (CRUDs, rotas, controllers etc.).
+### Module 01 – Fundamentals & Linux CLI
+- Basic JavaScript data types, variables, operators
+- Console output and arithmetic exercises
+- Linux terminal commands: `mkdir`, `cd`, `ls`, `touch`, `pwd`, `echo`, `rm`
 
-### 🎮 **E_Sports**
-Aplicação envolvendo lógica de gerenciamento de jogadores, times ou partidas — prática de conceitos de programação.
+### Module 02 – Control Flow & User Input
+- Interactive CLI applications using `readline`
+- Conditional logic (`if/else`, `switch`)
+- Basic games and calculators
 
-### 📦 **Express**
-Exercícios e exemplos utilizando o framework **Express.js**, demonstrando rotas, middlewares e integração com APIs.
+### Module 03 – Core Logic & Data Structures
+- Arrays, array methods, and loops
+- Functions and arrow functions
+- Objects and property access
+- Problem-solving exercises
 
-### 🃏 **FlashCards**
-Projeto que simula um sistema de flashcards, usado para revisar conteúdos e aplicar lógica de estudo.
+### Module 04 – Intermediate Logic
+- Game logic (rock-paper-scissors)
+- Password generator
+- Inventory system
+- Business rules and validation
 
-### 👥 **Gerenciamento_Usuarios**
-Implementações relacionadas ao cadastro, leitura, atualização e remoção de dados de usuários.
+### Module 05 – Modularization & Team Collaboration
+- Modular architecture with `require` and `module.exports`
+- Team projects: modular calculators, E-sports manager, mission manager
+- Git and GitHub workflow
 
-### 🗃️ **MongoDB**
-Arquivos com exemplos de uso de banco de dados **MongoDB**, integrações e consultas.
+### Module 06 – User Management System (CRUD)
+- Full CRUD (Create, Read, Update, Delete) implementation
+- Sequential IDs, unique email constraint
+- Validation and error handling
+- CLI-based user listing, updates, and removal
 
-### 🚀 **ProjetoFinal**
-Projeto de conclusão do curso — solução integrada utilizando tudo o que foi aprendido.
+### Module 07 – FlashCards System
+- Modular FlashCards management system
+- Decks and flashcards linked via IDs
+- Full CRUD with filtering and search
+- Validation-heavy logic
 
-### 🧠 **TypeScript**
-Exercícios e exemplos com **TypeScript**, mostrando tipagem estática e boas práticas.
+### Module 08 – Electronic Voting System (Urna)
+- CLI-based voting system
+- Age verification, vote uniqueness
+- Candidate registration and vote counting
+- Rule enforcement and integrity-focused logic
 
-### 🧩 **lions-dev-arquiterua**
-Documentação, diagramas ou arquivos relacionados à arquitetura dos sistemas desenvolvidos.
+### Module 09 – Express.js Fundamentals
+- Express.js server and routing
+- REST-style API endpoints (GET, POST, PUT, DELETE)
+- Request (`req`) and response (`res`) handling
+- Middleware usage and async/await
+- Error handling, status codes, environment variables
+- API testing with Postman / Insomnia
 
-### 📚 **modulo_1** e **modulo_2**
-Pastas com atividades iniciais organizadas por módulos do curso.
+### Module 10 – Full Backend Systems with MongoDB
+- Migration from in-memory arrays to **MongoDB**
+- MVC architecture with Models, Controllers, Services, Repositories
+- JWT authentication, bcrypt password hashing
+- Role-based access control and protected routes
+- CRUD operations, async operations, and error handling
+- Multiple real-world projects: scheduling, stock management, FlashCards, rentals, authentication
 
-### 🔑 **token**
-Arquivos e exemplos relacionados à autenticação (token JWT ou similar).
-
----
-
-## 🛠️ Tecnologias e Ferramentas Usadas
-
-O repositório abrange várias tecnologias estudadas durante o curso:
-
-- **JavaScript** (principal linguagem dos exercícios)
-- **TypeScript**
-- **Node.js**
-- **Express.js**
-- **MongoDB**
-- Outras dependências de backend conforme o módulo
-
----
-
-## 🚀 Como Rodar os Projetos
-
-### 🔹 Pré‑requisitos
-Antes de começar, instale no seu computador:
-
-- Node.js (v14 ou superior)
-- NPM ou Yarn
-- MongoDB (para projetos que usam banco de dados)
-
-### 💻 Executando um Projeto
-
-1. Clone o repositório:
-
-```bash
-git clone https://github.com/Alex1Ribas/LionsDev.git
-````
-
-2. Entre na pasta do projeto que deseja executar:
-
-```bash
-cd LionsDev/Express
-```
-
-3. Instale as dependências:
-
-```bash
-npm install
-```
-
-4. Inicie o servidor:
-
-```bash
-npm start
-```
-
-Ou, se usa um script do `package.json`:
-
-```bash
-npm run dev
-```
-
-(Dica: adapte conforme cada pasta / projeto.)
+### TCC – Personal Finance Management System (Fullstack)
+- Complete backend with **Express, MongoDB, MVC, JWT, bcrypt**
+- Full CRUD for users, expenses, income, and financial reports
+- Modular architecture with repositories, services, controllers, routes
+- Input validation and centralized error handling
+- Full Jest testing coverage (unit and integration tests)
+- Frontend built with FlutterFlow interacting with the backend
+- Production-ready fullstack system
 
 ---
 
-## 📝 Observações
-
-* Cada pasta pode ter seu próprio `package.json`, README interno ou instruções específicas.
-* Se algum projeto usar banco de dados, certifique‑se de ter o MongoDB ativo localmente ou em nuvem.
+## Technologies
+- Node.js & JavaScript
+- Express.js
+- MongoDB & Mongoose
+- JWT & bcrypt
+- CLI interaction (`readline`, `prompt-sync`)
+- dotenv for environment configuration
+- Jest for testing
+- FlutterFlow for frontend (TCC project)
 
 ---
 
-## ✨ Contribuições
-
-Este repositório é pessoal e reflete meu aprendizado ao longo do curso. Você pode explorar, aprender com os códigos e até sugerir melhorias!
+## Learning Outcomes
+- From **basic JS logic to full backend systems**
+- Modular code architecture
+- Asynchronous programming and error handling
+- REST API design and testing
+- Authentication, authorization, and role-based access
+- Database design with MongoDB and Mongoose
+- End-to-end fullstack development
 
 ---
+
+## Notes
+This repository is designed to **demonstrate growth and skill development** over time.  
+Each module builds upon the previous one, culminating in a **professional fullstack project** (TCC) that integrates backend, database, security, and frontend.
+
+It is suitable for:
+- Portfolio presentation
+- Job interviews
+- Showcasing backend and fullstack capabilities
+
 
 ## 👤 Autor
 
