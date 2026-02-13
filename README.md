@@ -1,123 +1,117 @@
-# 🦁 LionsDev - Repositório de Exercícios e Projetos Node.js & MongoDB
+# LionsDev
 
-## Overview
-This repository documents my **full backend development journey**, covering **10 modules of progressive learning** and a **fullstack TCC project**.  
-
-From **basic JavaScript logic and CLI exercises** to **database-driven applications with Express, MongoDB, JWT authentication, and frontend integration**, this portfolio demonstrates **structured learning, problem-solving, and professional application development**.
-
-The projects are organized in modules to show **step-by-step evolution**, making it clear how I progressed from fundamentals to full production-ready systems.
+Backend development learning repository structured to demonstrate technical progression from foundational concepts to a complete fullstack application.
+This repository documents the evolution of my backend development skills throughout a structured training program, organized by modules to clearly reflect growth in complexity and architectural understanding.
 
 ---
 
-## What You Will Find
+## 🚀 Technical Skills Demonstrated
 
-### Module 01 – Fundamentals & Linux CLI
-- Basic JavaScript data types, variables, operators
-- Console output and arithmetic exercises
-- Linux terminal commands: `mkdir`, `cd`, `ls`, `touch`, `pwd`, `echo`, `rm`
+By the end of this repository, I am capable of building:
 
-### Module 02 – Control Flow & User Input
-- Interactive CLI applications using `readline`
-- Conditional logic (`if/else`, `switch`)
-- Basic games and calculators
-
-### Module 03 – Core Logic & Data Structures
-- Arrays, array methods, and loops
-- Functions and arrow functions
-- Objects and property access
-- Problem-solving exercises
-
-### Module 04 – Intermediate Logic
-- Game logic (rock-paper-scissors)
-- Password generator
-- Inventory system
-- Business rules and validation
-
-### Module 05 – Modularization & Team Collaboration
-- Modular architecture with `require` and `module.exports`
-- Team projects: modular calculators, E-sports manager, mission manager
-- Git and GitHub workflow
-
-### Module 06 – User Management System (CRUD)
-- Full CRUD (Create, Read, Update, Delete) implementation
-- Sequential IDs, unique email constraint
-- Validation and error handling
-- CLI-based user listing, updates, and removal
-
-### Module 07 – FlashCards System
-- Modular FlashCards management system
-- Decks and flashcards linked via IDs
-- Full CRUD with filtering and search
-- Validation-heavy logic
-
-### Module 08 – Electronic Voting System (Urna)
-- CLI-based voting system
-- Age verification, vote uniqueness
-- Candidate registration and vote counting
-- Rule enforcement and integrity-focused logic
-
-### Module 09 – Express.js Fundamentals
-- Express.js server and routing
-- REST-style API endpoints (GET, POST, PUT, DELETE)
-- Request (`req`) and response (`res`) handling
-- Middleware usage and async/await
-- Error handling, status codes, environment variables
-- API testing with Postman / Insomnia
-
-### Module 10 – Full Backend Systems with MongoDB
-- Migration from in-memory arrays to **MongoDB**
-- MVC architecture with Models, Controllers, Services, Repositories
-- JWT authentication, bcrypt password hashing
-- Role-based access control and protected routes
-- CRUD operations, async operations, and error handling
-- Multiple real-world projects: scheduling, stock management, FlashCards, rentals, authentication
-
-### TCC – Personal Finance Management System (Fullstack)
-- Complete backend with **Express, MongoDB, MVC, JWT, bcrypt**
-- Full CRUD for users, expenses, income, and financial reports
-- Modular architecture with repositories, services, controllers, routes
-- Input validation and centralized error handling
-- Full Jest testing coverage (unit and integration tests)
-- Frontend built with FlutterFlow interacting with the backend
-- Production-ready fullstack system
+* RESTful APIs using Node.js
+* Modular backend architecture
+* CRUD operations with database integration
+* Authentication and authorization (JWT-based)
+* Middleware-based request handling
+* Error handling strategies
+* Environment configuration
+* Basic fullstack integration
 
 ---
 
-## Technologies
-- Node.js & JavaScript
-- Express.js
-- MongoDB & Mongoose
-- JWT & bcrypt
-- CLI interaction (`readline`, `prompt-sync`)
-- dotenv for environment configuration
-- Jest for testing
-- FlutterFlow for frontend (TCC project)
+## 📂 Project Structure
+
+The repository is organized into modules:
+
+```
+modules-01 → modules-10
+```
+
+Each module represents a stage of progression, from foundational JavaScript and Node.js concepts to more advanced backend architecture and fullstack implementation.
+
+Each module contains a dedicated `README.md` explaining its focus and objectives.
 
 ---
 
-## Learning Outcomes
-- From **basic JS logic to full backend systems**
-- Modular code architecture
-- Asynchronous programming and error handling
-- REST API design and testing
-- Authentication, authorization, and role-based access
-- Database design with MongoDB and Mongoose
-- End-to-end fullstack development
+## 🧠 Learning Philosophy
+
+The original implementation logic from each module was intentionally preserved.
+
+Rather than refactoring earlier code to “improve” it retroactively, the goal was to maintain visibility of:
+
+* Problem-solving evolution
+* Architectural growth
+* Increasing code organization
+* Improved naming and structural decisions over time
+
+This allows readers to observe technical maturity developing progressively.
 
 ---
 
-## Notes
-This repository is designed to **demonstrate growth and skill development** over time.  
-Each module builds upon the previous one, culminating in a **professional fullstack project** (TCC) that integrates backend, database, security, and frontend.
+## 🏗 Final Project (TCC)
 
-It is suitable for:
-- Portfolio presentation
-- Job interviews
-- Showcasing backend and fullstack capabilities
+The final module consolidates the main concepts into a fullstack application, including:
+
+* Backend API
+* Authentication
+* Database integration
+* Organized route/controller structure
+
+This project represents the culmination of the technical foundations built throughout the course.
+
+---
+
+## 🔄 Repository Refactor
+
+The repository was later reorganized to improve clarity and structure:
+
+* Standardized naming conventions (English only)
+* Reorganized directories into progressive modules
+* Added documentation to contextualize each stage
+* Minimal code adjustments were made only when required to preserve functionality after restructuring
+
+No significant business logic was altered.
+
+---
+
+## 📈 What This Repository Represents
+
+This repository is not just a collection of exercises.
+
+It represents:
+
+* Structured learning
+* Increasing architectural awareness
+* Backend development fundamentals
+* Code organization maturity
+* Commitment to continuous improvement
+
+---
+
+## 🛠 Technologies Used
+
+* JavaScript
+* Node.js
+* Express
+* MongoDB
+* JWT
+* Git
+
+---
+
+## 📌 Future Improvements
+
+* Add automated tests
+* Improve API documentation
+* Introduce containerization (Docker)
+* Enhance architectural separation (services layer, etc.)
+
+---
 
 
-## 👤 Autor
+## 👤 Author
 
 **Alex Ribas**
-📍 Estudante de Desenvolvimento Web
+📍 Student Developer Backend + frontend(NoCode)
 🔗 GitHub: [https://github.com/Alex1Ribas](https://github.com/Alex1Ribas)
